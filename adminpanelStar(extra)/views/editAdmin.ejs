@@ -1,0 +1,59 @@
+<%-include('header')%>
+
+<div class="main-panel">
+          <div class="content-wrapper">
+            <div class="row">
+             
+              <div class="col-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Basic form elements</h4>
+                    <p class="card-description"> Basic form elements </p>
+                    <form class="forms-sample" action="/admin/editAdminData/<%=single.id%>" method="post" enctype="multipart/form-data">
+                      <div class="form-group">
+                        <label for="exampleInputName1">Name</label>
+                        <input type="text" class="form-control" id="exampleInputName1" name="name" value="<%=single.name%>"  placeholder="Name">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputEmail3">Email address</label>
+                        <input type="email" name="email" class="form-control" id="exampleInputEmail3"  value="<%=single.email%>" placeholder="Email">
+                      </div>
+                      
+                      <div class="form-group">
+                        <label for="exampleSelectGender">Gender</label>
+                        <select class="form-select"name="gender" id="exampleSelectGender">
+                          <option value="male" <% if(single.gender=='male'){ %> selected <%}%> >Male</option>
+                          <option value="female"  <% if(single.gender=='female'){ %> selected <%}%>>Female</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label>Profile Image Upload</label>
+                        <input type="file" name="profile" class="file-upload-default">
+                        <div class="input-group col-xs-12">
+                          <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
+                          <span class="input-group-append">
+                            <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
+                          </span>
+                        </div>
+                        <img src="/uploads/<%=single.profile%>" width="50px"  alt="profile">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputCity1">City</label>
+                        <input type="text" name="city" value="<%=single.city%>" class="form-control" id="exampleInputCity1" placeholder="Location">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleTextarea1">Description</label>
+                        <textarea class="form-control" name="description" id="exampleTextarea1" rows="4"><%=single.description%></textarea>
+                      </div>
+                      <input type="submit" class="btn btn-primary me-2" value="Update">
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- content-wrapper ends -->
+          
+        </div>
+
+        <%-include('footer')%>

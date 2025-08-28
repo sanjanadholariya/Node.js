@@ -1,0 +1,48 @@
+<%-include('header')%>
+  
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <div class="row">
+              <div class="col-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Basic Table</h4>
+                    <p class="card-description"> Add class <code>.table</code>
+                    </p>
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>Profile</th>
+                            <th>Name.</th>
+                            <th>Email</th>
+                            <th>City</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                          <%data.map((v)=>{%>
+                            <tr>
+                              <td>
+                                <img src="../uploads/<%=v.profile%>" width="30px" height="30px" style="border-radius: 50%;" alt="">
+                              </td>
+                              <td><%=v.name%></td>
+                              <td><%=v.email%></td>
+                              <td><%=v.city%></td>
+                              <td>
+                                <a href="/admin/delete/<%=v.id%>">Delete</a> || 
+                                <a href="/admin/edit/<%=v.id%>">Edit</a>
+                              </td>
+                            </tr>
+                          <%})%>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+          <!-- content-wrapper ends -->
+          <!-- partial:../../partials/_footer.html -->
+         <%-include('footer')%>

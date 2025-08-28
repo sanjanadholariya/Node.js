@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Budget Tracker</title>
+  
+</head>
+<body>
+  <h1>Budget Tracker System</h1>
+  <div class="container">
+
+    <!-- Summary Cards -->
+    <div class="summary">
+      <div class="card">Total Budget: <%= totalBudget || 0 %></div>
+      <div class="card">Total Expense: <%= sum || 0 %></div>
+      <div class="card">Budget Left: <%= leftBudget || 0 %></div>
+    </div>
+
+    <!-- Forms Section -->
+    <div class="forms">
+      <form action="/addBudget" method="post">
+        <h2>Add Budget</h2>
+        <label>Budget</label>
+        <input type="text" name="budget" required>
+        <input type="submit" value="Add Budget">
+      </form>
+
+      <form action="/addExpense" method="post">
+        <h2>Add Expense</h2>
+        <label>Expense Title</label>
+        <input type="text" name="title" required>
+        <label>Amount</label>
+        <input type="text" name="expense" required>
+        <input type="submit" value="Add Expense">
+        <a href="/allClear" class="btn reset-btn">Reset All</a>
+      </form>
+    </div>
+
+    <!-- Expense History -->
+    <h2>Expense History</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Expense Name</th>
+          <th>Amount</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% allExpense.forEach(e => { %>
+          <tr>
+            <td><%= e.title %></td>
+            <td><%= e.expense %></td>
+            <td>
+              <a href="/delete/<%= e.id %>" class="delete-btn">Remove</a>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="width: 700px; display: flex;">
+  <canvas id="myChart"></canvas>
+  <canvas id="myChartpie" style="margin-left: 300px;"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+   const ctx2 = document.getElementById('myChartpie');
+
+  new Chart(ctx2, {
+    type: 'pie',
+    data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+ 
+
+</body>
+</html>

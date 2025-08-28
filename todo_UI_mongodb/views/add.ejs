@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add ToDo</title>
+  <link rel="stylesheet" href="/css/addStyle.css">
+</head>
+<body>
+  <div align="center" class="Form">
+
+    <div>
+      <h1>
+        <span class="icon">📝</span>Add ToDo
+      </h1>
+    </div>
+
+    <form action="/addTodo" method="post">
+      
+      <div>
+        <label><span class="icon">🏷️</span>Title : </label>
+        <input type="text" name="title" placeholder="Enter Your Title Here...">
+      </div>
+
+      <div>
+        <label><span class="icon">✏️</span>Description : </label>
+        <textarea name="description" rows="4" cols="50" placeholder="Enter Your Description.."></textarea>
+      </div>
+
+      <div>
+        <label><span class="icon">📂</span>What kind of task? </label>
+        <select name="type">
+          <option value="">---- Select ----</option>
+          <option value="business">Business 💼</option>
+          <option value="family">Family 👨‍👩‍👧‍👦</option>
+          <option value="personal">Personal 🙋‍♀️</option>
+          <option value="finance">Finance 💰</option>
+          <option value="fun">Fun 🎉</option>
+        </select>
+      </div>
+
+      <div>
+        <label><span class="icon">📌</span>Status : </label>
+        <input type="radio" name="status" value="open">🔓 Open
+        <input type="radio" name="status" value="in-progress">⏳ In Progress
+        <input type="radio" name="status" value="review">🔍 Review
+        <input type="radio" name="status" value="done">✅ Done
+      </div>
+
+      <div>
+        <label><span class="icon">📅</span>Date : </label>
+        <input type="date" name="date">
+      </div>
+      
+      <input type="submit" value="Submit">
+      <a href="/">📋 Show ToDo List</a>
+      
+    </form>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<div align="center">
+  <h1>Edit Details</h1>
+
+  <form action="/editObject/<%=single._id%>" method="post" enctype="multipart/form-data">
+    <table border="1">
+      <tr>
+        <td>Name :-</td>
+        <td>
+          <input type="text" name="name" value="<%=single.name%>">
+        </td>
+      </tr>
+      <tr>
+        <td>Email :-</td>
+        <td>
+          <input type="email" name="email" value="<%=single.email%>">
+        </td>
+      </tr>
+      <tr>
+        <td>Gender</td>
+        <td>
+          <input type="radio" name="gender" value="male" <% if(single.gender=='male' ){ %>
+          <%="checked"%>
+            <%}%>>Male
+              <input type="radio" name="gender" value="female" <% if(single.gender=="female" ){ %>
+              <%="checked"%>
+                <%}%>>Female
+        </td>
+      </tr>
+      <tr>
+        <td>Hobby :-</td>
+        <td>
+          <input type="checkbox" name="hobby" value="reading" <% if(single.hobby.includes('reading')){%> checked <%}%>
+            >Reading
+            <input type="checkbox" name="hobby" value="dancing" <% if(single.hobby.includes('dancing')){%> checked <%}%>
+              >Dancing
+              <input type="checkbox" name="hobby" value="reel" <% if(single.hobby.includes('reel')){%> checked <%}%>
+                >Reel Scrolling
+                <input type="checkbox" name="hobby" value="swimming" <% if(single.hobby.includes('swimming')){%> checked
+                <%}%>>Swimming
+
+        </td>
+      </tr>
+      <tr>
+        <td>City :-</td>
+        <td>
+          <select name="city">
+            <option value="">----Select City----</option>
+            <option value="surat" <% if(single.city=='surat' ){ %> selected <%}%>>Surat</option>
+            <option value="vapi" <% if(single.city=='vapi' ){ %> selected <%}%>>Vapi</option>
+            <option value="vadodara" <% if(single.city=='vadodara' ){ %> selected <%}%>>Vadodara</option>
+            <option value="tapi" <% if(single.city=='tapi' ){ %> selected <%}%>>Tapi</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>About YourSelf :-</td>
+        <td>
+          <input type="textarea" name="about" value="<%=single.about%>">
+        </td>
+      </tr>
+      <tr>
+        <td>Add File :- :-</td>
+        <td>
+          <input type="file" name="profile">
+          <img src="<%=single.profile%>" width="100px" alt="Profile">
+          
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
+          <input type="submit" value="Edit">
+        </td>
+      </tr>
+    </table>
+  </form>
+
+  <a href="/viewData">View Data</a>
+
+
+</div>

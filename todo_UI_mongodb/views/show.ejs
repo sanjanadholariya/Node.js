@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Show ToDoList</title>
+  <link rel="stylesheet" href="/css/showStyle.css">
+</head>
+<body>
+
+<header>
+  <h1><span class="icon">📋</span>Show ToDo List</h1>
+  <a href="/add">➕ Add Todo</a>
+</header>
+
+<main class="todo-board">
+  
+  <section class="todo-column">
+    <h2>🔓 Open</h2>
+    <% allTodo.filter(t => t.status === "open").forEach(value => { %>
+      <div class="card">
+        <h3 class="title"><%= value.title %></h3>
+        <p class="description"><%= value.description %></p>
+        <div class="card-footer">
+          <span class="type"><%= value.type %></span>
+          <span class="date"><%= new Date(value.date).toLocaleDateString("en-IN") %></span>
+        </div>
+      </div>
+    <% }) %>
+  </section>
+
+  <section class="todo-column">
+    <h2>⏳ In Progress</h2>
+    <% allTodo.filter(t => t.status === "in-progress").forEach(value => { %>
+      <div class="card">
+        <h3 class="title"><%= value.title %></h3>
+        <p class="description"><%= value.description %></p>
+        <div class="card-footer">
+          <span class="type"><%= value.type %></span>
+          <span class="date"><%= new Date(value.date).toLocaleDateString("en-IN") %></span>
+        </div>
+      </div>
+    <% }) %>
+  </section>
+
+  <section class="todo-column">
+    <h2>🔍 Review</h2>
+    <% allTodo.filter(t => t.status === "review").forEach(value => { %>
+      <div class="card">
+        <h3 class="title"><%= value.title %></h3>
+        <p class="description"><%= value.description %></p>
+        <div class="card-footer">
+          <span class="type"><%= value.type %></span>
+          <span class="date"><%= new Date(value.date).toLocaleDateString("en-IN") %></span>
+        </div>
+      </div>
+    <% }) %>
+  </section>
+
+  <section class="todo-column">
+    <h2>✅ Done</h2>
+    <% allTodo.filter(t => t.status === "done").forEach(value => { %>
+      <div class="card">
+        <h3 class="title"><%= value.title %></h3>
+        <p class="description"><%= value.description %></p>
+        <div class="card-footer">
+          <span class="type"><%= value.type %></span>
+          <span class="date"><%= new Date(value.date).toLocaleDateString("en-IN") %></span>
+        </div>
+      </div>
+    <% }) %>
+  </section>
+
+</main>
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css
+  ">
+
+</head>
+
+<body>
+  <h1>Add Book</h1>
+  <div class="container ">
+    <div class="row ">
+      <%-include('header')%>
+      <div class="col-4">
+        <%-include('sidebar')%>
+      </div>
+      <div class="form col-8 d-flex  ">
+        <form action="/addBook" method="post" enctype="multipart/form-data">
+          <div class="col-6">
+            <label>Book Title :-</label>
+            <input type="text" name="title">
+            <label>Author</label>
+            <input type="text" name="author" id="">
+            <label>Total :-</label>
+            <input type="text" name="total">
+
+          </div>
+          <div class="col-6">
+            <label>Book Image :-</label>
+            <input type="file" name="image">
+            <label>Genre</label>
+            <input type="checkbox" name="genre" value="romance" id="">Romance
+            <input type="checkbox" name="genre" value="classic" id="">Classic
+            <input type="checkbox" name="genre" value="fantasy" id="">Fantasy
+            <input type="checkbox" name="genre" value="fiction" id="">Fiction
+            <input type="checkbox" name="genre" value="dystopian" id="">Dystopian
+            <label>Description</label>
+            <input type="text" name="description" id="">
+
+          </div>
+          <input type="submit" value="Submit" id="">
+        </form>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js
+  "></script>
+</body>
+
+</html>

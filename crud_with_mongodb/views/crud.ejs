@@ -1,0 +1,74 @@
+<div align="center">
+  <h1>Add Details</h1>
+
+  <form action="/addData" method="post" enctype="multipart/form-data">
+    <table border="1">
+      <tr>
+        <td>Name :-</td>
+        <td>
+          <input type="text" name="name">
+        </td>
+      </tr>
+      <tr>
+        <td>Email :-</td>
+        <td>
+          <input type="email" name="email">
+        </td>
+      </tr>
+      <tr>
+        <td>Gender</td>
+        <td>
+          <input type="radio" name="gender" value="male">Male
+          <input type="radio" name="gender" value="female">Female
+        </td>
+      </tr>
+      <tr>
+        <td>Hobby :-</td>
+        <td>
+          <input type="checkbox" name="hobby" value="reading" >Reading
+          <input type="checkbox" name="hobby" value="dancing">Dancing
+          <input type="checkbox" name="hobby" value="reel">Reel Scrolling
+          <input type="checkbox" name="hobby" value="swimming">Swimming
+
+        </td>
+      </tr>
+      <tr>
+        <td>City :-</td>
+        <td>
+          <select name="city" >
+            <option value="">----Select City----</option>
+            <option value="surat">Surat</option>
+            <option value="vapi">Vapi</option>
+            <option value="vadodara">Vadodara</option>
+            <option value="tapi">Tapi</option>
+
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>About YourSelf :-</td>
+        <td>
+          <input type="textarea" name="about" >
+        </td>
+      </tr>
+      <tr>
+        <td>Add File :- </td>
+        <td>
+          <input type="file" name="profile">
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
+          <input type="submit" value="Submit">
+        </td>
+      </tr>
+    </table>
+  </form>
+
+  <a href="/viewData">View Data</a>
+
+
+
+  
+</div>

@@ -1,0 +1,52 @@
+<h1 align="center">Todo Page</h1>
+
+<form action="/addtask" method="post" >
+  <table align="center"  border="1">
+    <tbody>
+      <tr>
+        <td>todo :-</td>
+        <td>
+          <input type="text" name="todo">
+        </td>
+      </tr>
+      <tr>
+        <td>Type :- </td>
+        <td>
+          <select name="type" >
+            <option value="office">office</option>
+            <option value="personal">personal</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
+          <input type="submit" value="submit">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</form>
+
+<table align="center" border="1">
+  <thead>
+    
+      <th>Id</th>  
+      <th>Todo</th>
+      <th>Type</th>
+      <th>Action</th>
+    
+  </thead>
+  <tbody>
+    <% allTask.map((v,i)=>{ %>
+      <tr>
+        <td><%=++i%></td>
+        <td><%=v.todo%></td>
+        <td><%=v.type%></td>
+        <td>
+          <a href="/deleteTodo?id=<%=v._id%>">Delete</a>
+        </td>
+      </tr>
+    <%})%>
+  </tbody>
+</table>

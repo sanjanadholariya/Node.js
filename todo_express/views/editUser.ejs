@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Users</title>
+</head>
+<body>
+    <div align="center">
+      <h1>Edit Users</h1>
+
+     <form action="/updatedusers" method="post">
+       <table border="1">
+        <input type="text" name="id" value="<%=single.id%>">
+        <tbody>
+          <tr>
+            <td>Name :-</td>
+            <td>
+              <input type="text" name="editname" placeholder="Enter Your Name..." id="" value="<%=single.name%>">
+            </td>
+          </tr>
+          <tr>
+            <td>Email :-</td>
+            <td>
+              <input type="text" name="editemail" placeholder="Enter Your Email..." value="<%=single.email%>">
+            </td>
+          </tr>
+          <tr>
+            <td>Password :-</td>
+            <td>
+              <input type="password" name="editpassword" placeholder="Enter Your Password..." value="<%=single.password%>">
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              <input type="submit" value="Edit">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <hr>
+      <a href="/">View Users</a>
+     </form>
+    </div>
+</body>
+</html>

@@ -26,7 +26,6 @@ const requestHandler = (req, res) => {
       res.end("<h1>Internal Server Error</h1>");
       return;
     }
-
     res.end(data); 
   });
 };

@@ -1,0 +1,205 @@
+body {
+  background-image: url('../images/bg.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 80px;
+  min-height: 100vh;
+  box-sizing: border-box;
+  overflow-y: hidden;
+}
+ label span.icon {
+      margin-right: 6px;
+      font-size: 1.1em;
+    }
+    h1 span.icon {
+      margin-right: 8px;
+    }
+
+.Form {
+  color: rgb(254, 214, 194);
+  background: rgba(83, 80, 80, 0.15);
+  backdrop-filter: blur(20px);
+  padding: 30px;
+  border-radius: 12px;
+  width: 900px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  border: 1px solid rgba(31, 30, 30, 0.2);
+  justify-content: start;
+}
+
+.Form h1 {
+  text-align: center;
+  margin-bottom: 25px;
+  width: 100%;
+  color: rgb(254, 214, 194);
+}
+
+.Form label {
+  display: inline-block;
+  width: 180px;
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 8px 0;
+  color: #f1f1f1;
+}
+
+.Form input[type="text"],
+.Form input[type="date"],
+.Form textarea,
+.Form select {
+  width: calc(100% - 200px);
+  padding: 10px 12px;
+  border: none;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.Form input[type="text"]:focus,
+.Form input[type="date"]:focus,
+.Form textarea:focus,
+.Form select:focus {
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+}
+
+.Form textarea {
+  resize: none;
+}
+
+.Form select {
+  appearance: none;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 10px 12px;
+  border-radius: 6px;
+  outline: none;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  background-image: linear-gradient(45deg, transparent 50%, #fff 50%),
+                    linear-gradient(135deg, #fff 50%, transparent 50%);
+  background-position: calc(100% - 15px) calc(50% - 4px),
+                       calc(100% - 10px) calc(50% - 4px);
+  background-size: 6px 6px;
+  background-repeat: no-repeat;
+}
+
+.Form select option {
+  background: rgb(114, 72, 50);
+  backdrop-filter: blur(5px);
+  color: #fff;
+  padding: 8px;
+}
+
+.Form select option::-webkit-scrollbar {
+  width: 8px;
+}
+.Form select option::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+.Form select option::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+.Form select option:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  color: #fff;
+  cursor: pointer;
+}
+
+.Form input[type="radio"] {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  position: relative;
+}
+
+.Form input[type="radio"]:checked {
+  background:  rgb(243, 201, 178);
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.6);
+}
+
+.Form input[type="radio"]:checked::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+}
+
+.Form div {
+  margin: 15px 0;
+  display: flex;
+  align-items: center;
+}
+
+.Form input[type="date"] {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 10px 12px;
+  border-radius: 6px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.Form input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1) opacity(0.8);
+  cursor: pointer;
+}
+
+.Form input[type="submit"] {
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-left: 180px;
+}
+
+.Form input[type="button"]:hover {
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+}
+.Form a {
+  display: inline-block;
+  margin-left: 180px;
+  margin-top: 15px;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #fff;
+  font-size: 1rem;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.Form a:hover {
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+}

@@ -1,0 +1,42 @@
+<div align="center">
+  <h1>
+      View Data
+  </h1>
+
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>gender</th>
+        <th>hobby</th>
+        <th>city</th>
+        <th>about</th>
+        <th>profile</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%allData.map((val,index)=>{%>
+        <tr>
+          <td><%=++index%></td>
+          <td><%=val.name%></td>
+          <td><%=val.email%></td>
+          <td><%=val.gender%></td>
+          <td><%=val.hobby%></td>
+          <td><%=val.city%></td>
+          <td><%=val.about%></td>
+         <td > <img src="<%= val.profile %>" width="100vh"  alt=""></td>
+          <td>
+            <a href="/deleteData?id=<%=val._id%>">Delete</a> || 
+            <a href="/editData/<%=val._id%>">Edit</a>
+          <a href="/uploads"></a>
+          </td>
+        </tr>
+      <%})%>
+    </tbody>
+  </table>
+
+  <a href="/">Add Data</a>
+</div>

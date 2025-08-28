@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>View Book</h1>
+<%-include('header')%>
+  <div class="col-4">
+    <%-include('sidebar')%>
+  </div>
+  <div class="col-8">
+    <table border="1">
+    <thead>
+      <th>TItle</th>
+      <th></th>
+      <th>Author</th>
+      <th>ISBN</th>
+      <th>Genre</th>
+      <th>Total</th>
+      <th>Description</th>
+      <th>Actions</th>
+    </thead>
+    <tbody>
+      <%allBook.map((b)=>{%>
+        <tr>
+          <td>
+            <img src="<%=b.image%>" width="50px" alt="img">
+          </td>
+          <td><%=b.title%></td>
+          <td><%=b.author%></td>
+          <td><%=b.isbn%></td>
+          <td><%=b.genre%></td>
+          <td><%=b.total%></td>
+          <td><%=b.description%></td>
+          <td>
+            <a href="/deleteBook/<%=b.id%>">Delete</a>
+            <a href="/editBook/<%=b.id%>">Edit</a>
+            <a href="/singleBook/<%=b.id%>">VIew Single</a>
+          </td>
+        </tr>
+      <%})%>
+    </tbody>
+  </table>
+  </div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Single Book View</h1>
+<%-include('header')%>
+  <div class="col-4">
+    <%-include('sidebar')%>
+  </div>
+  <div class="col-8">
+    <div class="card">
+    <h1><%=single.title%></h1>
+  <img src="<%=single.image%>" width="400px">
+  <h3><%=single.author%></h3>
+  <h3><%=single.isbn%></h3>
+  <h3><%=single.genre%></h3>
+  <h3><%=single.total%></h3>
+  <p><%=single.description%></p>
+  </div>
+  </div>
+</body>
+</html>
