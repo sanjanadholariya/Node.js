@@ -16,9 +16,23 @@ module.exports.admin = async (req, res) => {
 
 module.exports.view = async (req, res) => {
   try {
-    const data = await adminModel.find()
-    // console.log(data);
-
+        var search ="";
+       if(req.query.search) {
+        search = req.query.search
+      }
+      let data = await adminModel.find({
+         $or : [
+        {
+          name : {$regex : search,$options : 'i' }
+        },
+        {
+          email : {$regex : search,$options : 'i' }
+        },
+        {
+          city : {$regex : search,$options : 'i' }
+        }
+      ]  
+      })
     return res.render('view', {
       data
     })
@@ -26,8 +40,24 @@ module.exports.view = async (req, res) => {
   catch (err) {
     console.log(err);
     return res.redirect('/admin')
+  }
+}
+
+module.exports.viewSingle = async (req, res) => {
+  try {
+    const single = await adminModel.findById(req.params.id)
+    console.log(single.name);
+
+    return res.status(200).json({
+      status: "success",
+      data: single
+    })
+  } catch (err) {
+    console.log(err);
+    return res.redirect('/admin')
 
   }
+
 }
 
 module.exports.addAdmin = async (req, res) => {
@@ -111,10 +141,12 @@ module.exports.edit = async (req, res) => {
           let oldpath = path.join(__dirname, '../uploads/', single.profile)
           fs.unlinkSync(oldpath)
         }
-          req.body.profile = req.file.filename;
-      } 
-        await adminModel.findByIdAndUpdate(req.params.id, req.body)
-      
+        req.body.profile = req.file.filename;
+        req.body.name = req.body.fname + " " + req.body.lname;
+        req.body.update_date = moment().format('MM Do YYYY, h:mm:ss a');
+      }
+      await adminModel.findByIdAndUpdate(req.params.id, req.body)
+
     } else {
       console.log("No Data Found !!");
 

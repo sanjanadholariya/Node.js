@@ -13,5 +13,6 @@ routes.post('/addForm',adminModel.imageUpload,adminCtrl.addForm)
 routes.get('/delete/:id',adminCtrl.delete)
 routes.get('/edit/:id',adminCtrl.editAdmin)
 routes.post('/edit/:id',adminModel.imageUpload,adminCtrl.edit)
+routes.get('/viewSingle/:id',adminCtrl.viewSingle)
 
 module.exports = routes

@@ -3,6 +3,7 @@ const moment = require('moment')
 const bcrypt = require('bcrypt')
 const path = require('path')
 const fs = require('fs')
+const { options } = require('../routes/adminRoutes')
 
 module.exports.dashboard = async (req , res ) => {
   try{
@@ -42,8 +43,26 @@ module.exports.addFormData = async(req,res)=>{
 
 module.exports.table = async(req,res)=>{
   try{
-    const data = await adminModel.find()
-    return res.render('table',{
+    console.log(req.query.search);
+
+     var search ="";
+       if(req.query.search) {
+        search = req.query.search
+      }
+      let data = await adminModel.find({
+         $or : [
+        {
+          name : {$regex : search,$options : 'i' }
+        },
+        {
+          email : {$regex : search,$options : 'i' }
+        },
+        {
+          city : {$regex : search,$options : 'i' }
+        }
+      ]  
+      })
+    return res.render('table', {
       data
     })
   }
@@ -54,10 +73,25 @@ module.exports.table = async(req,res)=>{
   }
 }
 
+module.exports.viewSingle = async(req,res) => {
+  try{
+    const single = await adminModel.findById(req.params.id)
+  console.log(single);
+
+  return res.status(200).json({
+    status : 'success',
+    data : single
+  })
+  }catch(err){
+    console.log(err);
+    return res.redirect('/admin')
+    
+  }
+  
+}
 module.exports.delete = async(req,res) => {
   try{
     const single = await adminModel.findById(req.params.id)
-    console.log(single);
 
     if(single.profile){
       const oldpath = path.join(__dirname,'../uploads/',single.profile)
