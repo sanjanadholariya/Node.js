@@ -1,3 +1,5 @@
+const adminModel = require('../model/adminModel')
+
 module.exports.login = async(req , res)=>{
   try{
     return res.render('login')
@@ -10,7 +12,9 @@ module.exports.login = async(req , res)=>{
 
 module.exports.loginUser = async(req,res)=>{
   try{
-    console.log(req.body);
+    const admin = await adminModel.findOne(req.body.email)
+    console.log(admin);
+    
     return res.redirect('/admin')
   }
   catch(err){
