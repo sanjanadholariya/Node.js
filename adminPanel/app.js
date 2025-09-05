@@ -14,6 +14,9 @@ app.set('views',path.join(__dirname,'views'))
 
 app.use(express.urlencoded())
 
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+
 app.use(express.static(path.join(__dirname, "assets")));
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
