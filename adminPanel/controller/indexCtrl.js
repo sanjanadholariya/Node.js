@@ -1,5 +1,6 @@
 const adminModel = require('../model/adminModel')
 const bcrypt = require('bcrypt')
+const mailMessage = require('../config/middleware/mailMessage')
 
 module.exports.login = async(req , res)=>{
   try{
@@ -47,4 +48,35 @@ module.exports.loginUser = async(req,res)=>{
 module.exports.logoutUser = async(req,res) => {
   res.clearCookie('admin')
   return res.redirect('/')
+}
+
+module.exports.forgotPassword = async(req,res)=>{
+  console.log("Forgot Password");
+  return res.render('forgotPassword')
+  
+}
+
+module.exports.sendMailWithOTP = async(req,res)=>{
+  
+  try{
+    let OTP = Math.floor(Math.random()*1000)
+
+  let msg = {
+    from : "sanjanadholariya926@gmail.com",
+    to : "khanparautsav@gmail.com",
+    subject : "Demo",
+    html : `<p>Hello...!!</p>
+    <p>Your One Time Password Is ${OTP}.</p>`
+  }
+  await mailMessage.sendEmail(msg)
+  console.log("Send Mail With OTP !")
+  console.log(req.body.email);
+
+
+  
+  }catch(err){
+    console.log(err);
+    return res.redirect('/')
+    
+  }
 }
