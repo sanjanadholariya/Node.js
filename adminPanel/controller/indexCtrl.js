@@ -89,9 +89,9 @@ module.exports.sendMailWithOTP = async (req, res) => {
   }
 };
 
-module.exports.resetPassword = async(req, res) => {
+module.exports.resetPasswordPage = async(req, res) => {
   try{
-    return res.render('resetPassword')
+    return res.render('resetPasswordPage')
   }
   catch(err){
     console.log(err);
@@ -108,7 +108,7 @@ module.exports.verifyOtp = async (req, res) => {
 
     if(otp == req.body.otp){
       await res.clearCookie('otp')
-      return res.redirect('/resetPassword')
+      return res.redirect('/resetPasswordPage')
     }else{
       console.log("OTP is not match !!");
       
@@ -121,3 +121,41 @@ module.exports.verifyOtp = async (req, res) => {
     
   }
 };
+
+
+module.exports.resetPassword = async(req,res)=>{
+  console.log(req.body);
+
+  let password = req.body.password;
+  let cPassword = req.body.cPassword
+  
+  let email = req.cookies.email;
+
+  console.log(email);
+
+  let admin = await adminModel.findOne({email : email})
+  console.log(admin);
+
+  if(admin){
+    if(password == cPassword){
+      await res.clearCookie('email');
+      let newPassword = bcrypt.hashSync(password , 10)
+      console.log(newPassword);
+      await adminModel.findByIdAndUpdate(admin._id , {password : newPassword})
+      return res.redirect('/')
+      
+
+    }else{
+      console.log("Both Password Does Not Match !!");
+      return res.redirect('/resetPassword')
+      
+    }
+  }else{
+    console.log("Admin Is Not Exist !!");
+    return res.redirect('/')
+    
+  }
+  
+  
+  
+}
