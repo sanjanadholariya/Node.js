@@ -7,8 +7,11 @@ const bcrypt = require('bcrypt')
 
 module.exports.admin = async (req, res) => {
   try {
+    const admin = req.cookies.admin
     if (req.cookies.admin && req.cookies.admin._id) {
-      return res.render('dashboard')
+      return res.render('dashboard',
+        {admin}
+      )
     }
     else {
       return res.redirect('/')
@@ -22,7 +25,7 @@ module.exports.admin = async (req, res) => {
 
 module.exports.view = async (req, res) => {
   try {
-
+    const admin = req.cookies.admin
     if (req.cookies.admin && req.cookies.admin._id) {
       var search = "";
       if (req.query.search) {
@@ -42,7 +45,8 @@ module.exports.view = async (req, res) => {
         ]
       })
       return res.render('view', {
-        data
+        data,
+        admin
       })
     }
     else {
@@ -78,8 +82,11 @@ module.exports.viewSingle = async (req, res) => {
 
 module.exports.addAdmin = async (req, res) => {
   try {
+    const admin = req.cookies.admin
     if (req.cookies.admin && req.cookies.admin._id) {
-      return res.render('addAdmin')
+      return res.render('addAdmin',{
+        admin
+      })
     }
     else {
       return res.redirect('/')
@@ -120,7 +127,7 @@ module.exports.addForm = async (req, res) => {
 
 module.exports.delete = async (req, res) => {
   try {
-
+    
     if (req.cookies.admin && req.cookies.admin._id) {
 
     }
@@ -151,13 +158,14 @@ module.exports.delete = async (req, res) => {
 module.exports.editAdmin = async (req, res) => {
 
   try {
-
+const admin = req.cookies.admin
     if (req.cookies.admin && req.cookies.admin._id) {
 
       const single = await adminModel.findById(req.params.id)
       if (single) {
         return res.render('editAdmin', {
-          single
+          single,
+          admin
         })
       }
       else {
@@ -180,7 +188,7 @@ module.exports.edit = async (req, res) => {
   try {
 
     if (req.cookies.admin && req.cookies.admin._id) {
-
+      const admin = req.cookies.admin
       const single = await adminModel.findById(req.params.id)
       console.log(single.profile);
       if (req.body) {
@@ -209,5 +217,81 @@ module.exports.edit = async (req, res) => {
     console.log(err);
     return res.redirect('/admin')
 
+  }
+}
+
+
+module.exports.changePasswordPage = async(req, res) => {
+  try{
+    if (req.cookies.admin && req.cookies.admin._id){
+      const admin = req.cookies.admin
+      return res.render('changePasswordPage',
+        {admin}
+      )
+    }
+    else{
+      return res.redirect('/')
+    }
+  }catch(err){
+    console.log(err);
+    return res.redirect('/admin')
+    
+  }
+}
+module.exports.changePassword = async (req, res) => {
+  try{
+     if (req.cookies.admin && req.cookies.admin._id){
+      
+       console.log(req.body.oldPassword);
+       const admin = req.cookies.admin
+      //  console.log(admin);
+    
+        let metchPassword = await bcrypt.compare( req.body.oldPassword, admin.password  )
+        // console.log(metchPassword);
+        
+        if(metchPassword){
+          if(req.body.newPassword == req.body.confirmPassword){
+            console.log("New Metch !");
+            
+            let hashPassword = await bcrypt.hashSync(req.body.newPassword , 10)
+    
+            await adminModel.findByIdAndUpdate(admin._id , {password : hashPassword})
+            console.log("Password Update Succesfully...");
+    
+            return res.redirect('/admin')
+    }
+    else{
+      return res.redirect('/')
+    }
+      
+      }
+      else{
+        console.log("Not Metch New Password To Confirm Password");
+        return res.redirect('/changePasswordPage')
+      }
+    }
+    
+    
+  }catch(err){
+    console.log(err);
+    return res.redirect('/admin')
+    
+  }
+}
+
+module.exports.viewProfile = async(req, res) => {
+  try{
+    if (req.cookies.admin && req.cookies.admin._id){
+      let admin  = req.cookies.admin
+      return res.render('viewProfile',{
+        admin
+      })
+    }else{
+      return res.redirect('/')
+    }
+  }catch(err){
+    console.log(err);
+    return res.redirect('/admin')
+    
   }
 }

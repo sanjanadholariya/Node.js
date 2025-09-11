@@ -23,7 +23,7 @@ module.exports.loginUser = async (req, res) => {
         admin.email == req.body.email &&
         (await bcrypt.compare(req.body.password, admin.password))
       ) {
-        console.log("match !");
+        // console.log("match !");
         res.cookie("admin", admin);
         return res.redirect("/admin");
       } else {
