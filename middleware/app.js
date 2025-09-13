@@ -25,7 +25,7 @@ app.get('/contact',middleware,(req,res)=>{
   return res.render('contact')
 })
 
-app.get('/product',(req,res)=>{
+app.get('/product',middleware,(req,res)=>{
   return res.render('product')
 })
 
