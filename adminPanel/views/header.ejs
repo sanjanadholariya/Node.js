@@ -204,7 +204,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted waves-effect pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <%if(admin.profile){%>
-                                    <img src="/uploads/<%= admin.profile %>" alt="user" class="rounded-circle" width="31">
+                                    <img src="/uploads/<%= admin.profile %>" alt="user" class="rounded-circle" width="31px" height="31px">
                                     <%}else{%>
                                         <img src="/images/users/1.jpg" alt="user" class="rounded-circle" width="31">
                                         <%}%>
@@ -247,33 +247,16 @@
                                 <li class="sidebar-item"><a href="/admin/view" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> view table </span></a></li>
                             </ul>
                         </li>
+
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Blogs </span></a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item"><a href="/admin/addBlogPage" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu">Add Blog  </span></a></li>
+                                <li class="sidebar-item"><a href="/admin/viewBlogPage" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> view Blog </span></a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
             </div>
             <!-- End Sidebar scroll-->
         </aside>
-        <script src="/libs/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap tether Core JavaScript -->
-   
-    <script src="libs/popper.js/dist/umd/popper.min.js"></script>
-    <script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-    <script src="extra-libs/sparkline/sparkline.js"></script>
-    <!--Wave Effects -->
-    <script src="js/waves.js"></script>
-    <!--Menu sidebar -->
-    <script src="js/sidebarmenu.js"></script>
-    <!--Custom JavaScript -->
-    <script src="js/custom.min.js"></script>
-    <!--This page JavaScript -->
-    <!-- <script src="js/pages/dashboards/dashboard1.js"></script> -->
-    <!-- Charts js Files -->
-    <script src="libs/flot/excanvas.js"></script>
-    <script src="libs/flot/jquery.flot.js"></script>
-    <script src="libs/flot/jquery.flot.pie.js"></script>
-    <script src="libs/flot/jquery.flot.time.js"></script>
-    <script src="libs/flot/jquery.flot.stack.js"></script>
-    <script src="libs/flot/jquery.flot.crosshair.js"></script>
-    <script src="libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
-    <script src="js/pages/chart/chart-page-init.js"></script>

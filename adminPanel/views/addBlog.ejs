@@ -9,11 +9,11 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">Change Password</h4>
+                        <h4 class="page-title">Form Basic</h4>
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                   <li class="breadcrumb-item"><a href="/admin">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="/admin">Home</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Library</li>
                                 </ol>
                             </nav>
@@ -34,30 +34,48 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="card">
-                            <form class="form-horizontal" action="/admin/changePassword" method="post">
+                            <form class="form-horizontal" action="/admin/addBlog" method="post" enctype="multipart/form-data">
                                 <div class="card-body">
-                                    
+                                    <h4 class="card-title">Personal Info</h4>
                                     <div class="form-group row">
-                                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">Old Password</label>
+                                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">Title</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" name="oldPassword" id="fname" placeholder="Enter Old Password">
+                                            <input type="text" class="form-control" name="title" id="fname" placeholder="First Name Here">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">New Password</label>
+                                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Description</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" name="newPassword" id="lname" placeholder="Enter New Password">
+                                            <textarea class="form-control" name="description"></textarea>
                                         </div>
                                     </div>
+
+                                    <%let category = ["technology","history","future","news","body","languages"]%>
+
                                     <div class="form-group row">
-                                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">Confirm Password</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control" name="confirmPassword" id="lname" placeholder="Enter Confirm Password ">
+                                    <label  class="col-sm-3 text-right control-label col-form-label">Category</label>
+                                    <div class="col-md-9">
+                                        <select class="select2 form-control custom-select" name="category" style="width: 100%; height:36px;">
+                                            <option>Select</option>
+                                            <%category.map((category)=>{%>
+                                                <option value="<%=category%>"><%=category%></option>
+                                            <%})%>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label  class="col-sm-3 text-right control-label col-form-label">Image Upload</label>
+                                    <div class="col-md-9">
+                                        <div class="custom-file">
+                                            <input type="file" name="image" class="custom-file-input" id="validatedCustomFile" required>
+                                            <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+                                            <div class="invalid-feedback">Example invalid custom file feedback</div>
                                         </div>
                                     </div>
+                                </div>
                                  <div class="border-top">
-                                <div class="card-body">
-                                    <input type="submit" value="Submit">
+                                <div class="card-body col-sm-3 text-right ">
+                                    <input type="submit" value="Add">
                                 </div>
                             </div>
                                 </div>

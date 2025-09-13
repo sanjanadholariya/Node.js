@@ -225,6 +225,8 @@ module.exports.changePasswordPage = async(req, res) => {
   try{
     if (req.cookies.admin && req.cookies.admin._id){
       const admin = req.cookies.admin
+      console.log(admin);
+      
       return res.render('changePasswordPage',
         {admin}
       )
@@ -238,13 +240,14 @@ module.exports.changePasswordPage = async(req, res) => {
     
   }
 }
+
 module.exports.changePassword = async (req, res) => {
   try{
      if (req.cookies.admin && req.cookies.admin._id){
       
        console.log(req.body.oldPassword);
        const admin = req.cookies.admin
-      //  console.log(admin);
+       console.log(admin);
     
         let metchPassword = await bcrypt.compare( req.body.oldPassword, admin.password  )
         // console.log(metchPassword);
@@ -292,6 +295,38 @@ module.exports.viewProfile = async(req, res) => {
   }catch(err){
     console.log(err);
     return res.redirect('/admin')
+    
+  }
+}
+
+module.exports.addBlogPage = async(req,res)=>{
+  try{
+
+    if(req.cookies.admin && req.cookies.admin._id){ 
+      let admin = req.cookies.admin     
+      return res.render('addBlog',{
+        admin
+      })
+    }else{
+      return res.redirect('/')
+    }
+  }catch(err){
+    console.log(err);
+    return res.redirect('/admin')
+    
+  }
+}
+
+module.exports.addBlog = async(req, res) => {
+  try{
+    if(req.cookies.admin && req.cookies.admin._id){
+            
+    }else{
+      return res.redirect('/')
+    }
+  }catch(err){
+    console.log(err);
+    return res.redirect('/')
     
   }
 }
