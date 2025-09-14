@@ -6,6 +6,8 @@ const adminCtrl = require('../controller/adminCtrl')
 
 const adminModel = require('../model/adminModel')
 
+const blogModel = require('../model/blogModel')
+
 routes.get('/',adminCtrl.admin)
 routes.get('/view',adminCtrl.view)
 routes.get('/addAdmin',adminCtrl.addAdmin)
@@ -18,6 +20,6 @@ routes.get('/changePasswordPage', adminCtrl.changePasswordPage)
 routes.post('/changePassword',adminCtrl.changePassword)
 routes.get('/viewProfile',adminCtrl.viewProfile)
 routes.get('/addBlogPage',adminCtrl.addBlogPage)
-routes.post('/addBlog',adminCtrl.addBlog)
-
+routes.post('/addBlog',blogModel.imageUpload, adminCtrl.addBlog)
+routes.get('/viewBlogPage',adminCtrl.viewBlogPage)
 module.exports = routes

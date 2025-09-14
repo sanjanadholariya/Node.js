@@ -1,0 +1,50 @@
+<%- include('header') %>
+
+<!-- Page wrapper -->
+<div class="page-wrapper">
+  <div class="container-fluid">
+
+    <!-- Back button -->
+    <div class="row mb-3">
+      <div class="col-12">
+        <a href="/viewBlogPage" class="btn btn-outline-secondary">
+          ← Back to Blogs
+        </a>
+      </div>
+    </div>
+
+    <!-- Single Blog -->
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-md-10 col-sm-12">
+        <div class="card shadow-sm">
+          <!-- Blog Image -->
+          <img src="/uploads/<%= single.image %>" class="card-img-top" style="height:400px; object-fit:cover;" alt="Blog Image">
+
+          <div class="card-body">
+            <h2 class="card-title font-weight-bold text-dark mb-3">
+              <%= single.title %>
+            </h2>
+
+            <!-- Tags -->
+            <ul class="list-inline mb-3">
+              <% single.type.map((t)=>{ %>
+                <li class="list-inline-item badge badge-primary px-3 py-2">
+                  <%= t %>
+                </li>
+              <% }) %>
+            </ul>
+
+            <!-- Description -->
+            <p class="card-text text-muted" style="line-height:1.7; font-size:1rem;">
+              <%= single.description %>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- End Page wrapper -->
+
+<%- include('footer') %>

@@ -1,4 +1,5 @@
 const adminModel = require('../model/adminModel')
+const blogModel = require('../model/blogModel')
 const moment = require('moment');
 const { all } = require('../routes/adminRoutes');
 const fs = require('fs')
@@ -10,7 +11,7 @@ module.exports.admin = async (req, res) => {
     const admin = req.cookies.admin
     if (req.cookies.admin && req.cookies.admin._id) {
       return res.render('dashboard',
-        {admin}
+        { admin }
       )
     }
     else {
@@ -84,7 +85,7 @@ module.exports.addAdmin = async (req, res) => {
   try {
     const admin = req.cookies.admin
     if (req.cookies.admin && req.cookies.admin._id) {
-      return res.render('addAdmin',{
+      return res.render('addAdmin', {
         admin
       })
     }
@@ -127,7 +128,7 @@ module.exports.addForm = async (req, res) => {
 
 module.exports.delete = async (req, res) => {
   try {
-    
+
     if (req.cookies.admin && req.cookies.admin._id) {
 
     }
@@ -158,7 +159,7 @@ module.exports.delete = async (req, res) => {
 module.exports.editAdmin = async (req, res) => {
 
   try {
-const admin = req.cookies.admin
+    const admin = req.cookies.admin
     if (req.cookies.admin && req.cookies.admin._id) {
 
       const single = await adminModel.findById(req.params.id)
@@ -221,112 +222,145 @@ module.exports.edit = async (req, res) => {
 }
 
 
-module.exports.changePasswordPage = async(req, res) => {
-  try{
-    if (req.cookies.admin && req.cookies.admin._id){
+module.exports.changePasswordPage = async (req, res) => {
+  try {
+    if (req.cookies.admin && req.cookies.admin._id) {
       const admin = req.cookies.admin
       console.log(admin);
-      
+
       return res.render('changePasswordPage',
-        {admin}
+        { admin }
       )
     }
-    else{
+    else {
       return res.redirect('/')
     }
-  }catch(err){
+  } catch (err) {
     console.log(err);
     return res.redirect('/admin')
-    
+
   }
 }
 
 module.exports.changePassword = async (req, res) => {
-  try{
-     if (req.cookies.admin && req.cookies.admin._id){
-      
-       console.log(req.body.oldPassword);
-       const admin = req.cookies.admin
-       console.log(admin);
-    
-        let metchPassword = await bcrypt.compare( req.body.oldPassword, admin.password  )
-        // console.log(metchPassword);
-        
-        if(metchPassword){
-          if(req.body.newPassword == req.body.confirmPassword){
-            console.log("New Metch !");
-            
-            let hashPassword = await bcrypt.hashSync(req.body.newPassword , 10)
-    
-            await adminModel.findByIdAndUpdate(admin._id , {password : hashPassword})
-            console.log("Password Update Succesfully...");
-    
-            return res.redirect('/admin')
-    }
-    else{
-      return res.redirect('/')
-    }
-      
+  try {
+    if (req.cookies.admin && req.cookies.admin._id) {
+
+      console.log(req.body.oldPassword);
+      const admin = req.cookies.admin
+      console.log(admin);
+
+      let matchPassword = await bcrypt.compare(req.body.oldPassword, admin.password)
+      // console.log(matchPassword);
+
+      if (matchPassword) {
+        if (req.body.newPassword == req.body.confirmPassword) {
+          console.log("New Match !");
+
+          let hashPassword = await bcrypt.hashSync(req.body.newPassword, 10)
+
+          await adminModel.findByIdAndUpdate(admin._id, { password: hashPassword })
+          console.log("Password Update Successfully...");
+
+          return res.redirect('/admin')
+        }
+        else {
+          return res.redirect('/')
+        }
+
       }
-      else{
-        console.log("Not Metch New Password To Confirm Password");
+      else {
+        console.log("Not Match New Password To Confirm Password");
         return res.redirect('/changePasswordPage')
       }
     }
-    
-    
-  }catch(err){
+
+
+  } catch (err) {
     console.log(err);
     return res.redirect('/admin')
-    
+
   }
 }
 
-module.exports.viewProfile = async(req, res) => {
-  try{
-    if (req.cookies.admin && req.cookies.admin._id){
-      let admin  = req.cookies.admin
-      return res.render('viewProfile',{
+module.exports.viewProfile = async (req, res) => {
+  try {
+    if (req.cookies.admin && req.cookies.admin._id) {
+      let admin = req.cookies.admin
+      return res.render('viewProfile', {
         admin
       })
-    }else{
+    } else {
       return res.redirect('/')
     }
-  }catch(err){
+  } catch (err) {
     console.log(err);
     return res.redirect('/admin')
-    
+
   }
 }
 
-module.exports.addBlogPage = async(req,res)=>{
-  try{
+module.exports.addBlogPage = async (req, res) => {
+  try {
 
-    if(req.cookies.admin && req.cookies.admin._id){ 
-      let admin = req.cookies.admin     
-      return res.render('addBlog',{
+    if (req.cookies.admin && req.cookies.admin._id) {
+      let admin = req.cookies.admin
+      return res.render('addBlog', {
         admin
       })
-    }else{
+    } else {
       return res.redirect('/')
     }
-  }catch(err){
+  } catch (err) {
     console.log(err);
     return res.redirect('/admin')
-    
+
   }
 }
 
-module.exports.addBlog = async(req, res) => {
+module.exports.addBlog = async (req, res) => {
+  try {
+    if (req.cookies.admin && req.cookies.admin._id) {
+      let date = new Date()
+      console.log(date);
+
+      if (req.file) {
+        req.body.image =  req.file.filename
+      }
+
+      req.body.date = date;
+
+      console.log(req.body);
+
+      await blogModel.create(req.body)
+
+      return res.redirect('/admin/viewBlogPage')
+
+    } else {
+      return res.redirect('/')
+    }
+  } catch (err) {
+    console.log(err);
+    return res.redirect('/admin')
+
+  }
+}
+
+module.exports.viewBlogPage = async(req,res) => {
   try{
     if(req.cookies.admin && req.cookies.admin._id){
-            
+      let admin = req.cookies.admin
+      const allBlog = await blogModel.find()
+      return res.render('viewBlog',{
+        allBlog,
+        admin
+      })
     }else{
       return res.redirect('/')
     }
   }catch(err){
     console.log(err);
-    return res.redirect('/')
+    return res.redirect('/admin')
     
   }
 }

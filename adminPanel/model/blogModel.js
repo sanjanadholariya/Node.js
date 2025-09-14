@@ -35,7 +35,7 @@ const storage = multer.diskStorage({
   }
 })
 
-adminSchema.statics.imageUpload = multer({storage : storage}).single('image')
+blogSchema.statics.imageUpload = multer({storage : storage}).single('image')
 
 const blog = mongoose.model('blog',blogSchema)
 
