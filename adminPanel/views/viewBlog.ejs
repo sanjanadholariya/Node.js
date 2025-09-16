@@ -145,8 +145,14 @@ body {
               <p class="card-text text-muted">
                 <%= val.description.substring(0,100) %>...
               </p>
-              <a href="/viewMore/<%= val._id %>" class="btn btn-outline-primary btn-sm">
+              <a href="/admin/viewSingleBlog/<%=val._id%>" class="btn btn-primary btn-sm">
                 View More
+              </a>
+              <a href="/admin/editBlogPage/<%=val._id%>" class="btn btn-outline-warning  btn-sm">
+                Edit Blog
+              </a>
+              <a href="/admin/deleteBlog/<%=val._id%>" class="btn btn-outline-danger btn-sm">
+                Delete
               </a>
             </div>
           </div>

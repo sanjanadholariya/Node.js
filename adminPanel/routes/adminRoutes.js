@@ -22,4 +22,8 @@ routes.get('/viewProfile',adminCtrl.viewProfile)
 routes.get('/addBlogPage',adminCtrl.addBlogPage)
 routes.post('/addBlog',blogModel.imageUpload, adminCtrl.addBlog)
 routes.get('/viewBlogPage',adminCtrl.viewBlogPage)
+routes.get('/viewSingleBlog/:id',adminCtrl.viewSingleBlog)
+routes.get('/editBlogPage/:id',adminCtrl.editBlogPage)
+routes.post('/editBlog/:id',blogModel.imageUpload,adminCtrl.editBlog)
+routes.get('/deleteBlog/:id',adminCtrl.deleteBlog)
 module.exports = routes

@@ -325,12 +325,11 @@ module.exports.addBlog = async (req, res) => {
       console.log(date);
 
       if (req.file) {
-        req.body.image =  req.file.filename
+        req.body.image = req.file.filename
       }
 
       req.body.date = date;
-
-      console.log(req.body);
+      req.body.editDate = date;
 
       await blogModel.create(req.body)
 
@@ -346,21 +345,123 @@ module.exports.addBlog = async (req, res) => {
   }
 }
 
-module.exports.viewBlogPage = async(req,res) => {
-  try{
-    if(req.cookies.admin && req.cookies.admin._id){
+module.exports.viewBlogPage = async (req, res) => {
+  try {
+    if (req.cookies.admin && req.cookies.admin._id) {
       let admin = req.cookies.admin
       const allBlog = await blogModel.find()
-      return res.render('viewBlog',{
+      return res.render('viewBlog', {
         allBlog,
         admin
       })
-    }else{
+    } else {
       return res.redirect('/')
     }
-  }catch(err){
+  } catch (err) {
     console.log(err);
     return res.redirect('/admin')
-    
+
+  }
+}
+
+module.exports.viewSingleBlog = async (req, res) => {
+  try {
+    if (req.cookies.admin && req.cookies.admin._id) {
+      let admin = req.cookies.admin
+      let single = await blogModel.findById(req.params.id)
+      return res.render('viewSingleBlog', {
+        single,
+        admin
+      })
+    } else {
+      return res.redirect('/')
+    }
+  } catch (err) {
+    console.log(err);
+    return res.redirect('/admin')
+
+  }
+}
+
+module.exports.editBlogPage = async (req, res) => {
+  try {
+    if (req.cookies.admin && req.cookies.admin._id) {
+      let admin = req.cookies.admin
+      let single = await blogModel.findById(req.params.id)
+
+      return res.render('editBlogPage', {
+        admin,
+        single
+      })
+    }
+  } catch (err) {
+    console.log(err);
+    return res.redirect('/admin')
+  }
+}
+
+module.exports.editBlog = async (req, res) => {
+  try {
+    if (req.cookies.admin && req.cookies.admin._id) {
+      let admin = req.cookies.admin
+      let date = new Date()
+      let single = await blogModel.findById(req.params.id)
+      if(req.file){
+        if(single.image){
+          console.log("image Update");
+          console.log(req.file.filename);
+          
+          
+          let oldpath = path.join(__dirname, '../uploads/', single.image)
+            fs.unlinkSync(oldpath)
+          req.body.image = req.file.filename
+        }
+        else{
+          req.body.image = req.file.filename
+        }
+      }
+      req.body.editDate = date
+      console.log(req.body);
+
+      await blogModel.findByIdAndUpdate(req.params.id ,  req.body  )
+      
+      return res.redirect('/admin/viewBlogPage')
+      
+
+
+    }
+    else {
+      return res.redirect('/')
+    }
+  } catch (err) {
+    console.log(err);
+    return res.redirect('/admin')
+
+  }
+}
+
+module.exports.deleteBlog = async (req, res) => {
+  try {
+    if (req.cookies.admin && req.cookies.admin._id) {
+      console.log(req.params.id);
+      let single = await blogModel.findById(req.params.id)
+      console.log(single);
+
+      if (single.image) {
+        console.log("image");
+
+        let oldpath = path.join(__dirname, '../uploads/', single.image)
+            fs.unlinkSync(oldpath)
+      }
+      await blogModel.findByIdAndDelete(req.params.id)
+
+      return res.redirect('/admin/viewBlogPage')
+    } else {
+      return res.redirect('/')
+    }
+  } catch (err) {
+    console.log(err);
+    return res.redirect('/admin')
+
   }
 }
