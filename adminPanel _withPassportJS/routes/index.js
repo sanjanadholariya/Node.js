@@ -1,12 +1,13 @@
 const express = require('express')
 const { login, loginUser, logoutUser, forgotPassword, sendMailWithOTP, checkOtpPage, verifyOtp, resetPasswordPage, resetPassword, changePasswordPage, changePassword } = require('../controller/indexCtrl')
 const { route } = require('./adminRoutes')
+const passport = require('../config/middleware/localStrategy')
 
 const routes = express.Router()
 
 routes.get('/',login)
 routes.post('/loginUser',loginUser)
-routes.use('/admin',require('./adminRoutes'))
+routes.use('/admin',passport.checkAdmin,require('./adminRoutes'))
 routes.get('/logoutUser',logoutUser)
 routes.get('/forgotPassword',forgotPassword)
 routes.post('/sendMailWithOTP',sendMailWithOTP)

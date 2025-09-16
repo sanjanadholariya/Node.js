@@ -4,11 +4,9 @@ const mailMessage = require("../config/middleware/mailMessage");
 
 module.exports.login = async (req, res) => {
   try {
-    if (req.cookies.admin == undefined || req.cookies.admin._id == undefined) {
+    
       return res.render("login");
-    } else {
-      return res.redirect("/admin");
-    }
+    
   } catch (err) {
     console.log(err);
     return res.redirect("/");

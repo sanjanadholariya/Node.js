@@ -1,5 +1,5 @@
 const passport = require('passport')
-const localStrategy = require('passport-local').localStrategy
+const localStrategy = require('passport-local').Strategy
 const adminModel = require('../../model/adminModel')
 const bcrypt = require('bcrypt')
 
@@ -31,5 +31,14 @@ passport.deserializeUser(async(id , cb) => {
         cb(null , adminRecord )
     }
 })
+
+
+passport.checkAdmin = async(req , res , next) => {
+    if(req.isAuthenticated()){
+        next();
+    }else{
+        return res.redirect('/')
+    }
+}
 
 module.exports = passport
