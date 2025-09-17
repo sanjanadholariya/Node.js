@@ -3,11 +3,11 @@ const { login, loginUser, logoutUser, forgotPassword, sendMailWithOTP, checkOtpP
 const { route } = require('./adminRoutes')
 const passport = require('../config/middleware/localStrategy')
 
+
 const routes = express.Router()
 
 routes.get('/',login)
-routes.post('/loginUser',loginUser)
-routes.use('/admin',passport.checkAdmin,require('./adminRoutes'))
+routes.post('/loginUser',passport.authenticate('local' , {failureRedirect : '/'}),loginUser)
 routes.get('/logoutUser',logoutUser)
 routes.get('/forgotPassword',forgotPassword)
 routes.post('/sendMailWithOTP',sendMailWithOTP)
@@ -15,6 +15,8 @@ routes.get('/checkOtpPage',checkOtpPage)
 routes.post('/verifyOtp',verifyOtp)
 routes.get('/resetPasswordPage',resetPasswordPage)
 routes.post('/resetPassword',resetPassword)
+
+routes.use('/admin',passport.checkAdmin,require('./adminRoutes'))
 
 
 

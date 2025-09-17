@@ -8,15 +8,9 @@ const bcrypt = require('bcrypt')
 
 module.exports.admin = async (req, res) => {
   try {
-    const admin = req.cookies.admin
-    if (req.cookies.admin && req.cookies.admin._id) {
-      return res.render('dashboard',
-        { admin }
-      )
-    }
-    else {
-      return res.redirect('/')
-    }
+    
+      return res.render('dashboard')
+    
   } catch (err) {
     console.log(err);
     return res.redirect('/')

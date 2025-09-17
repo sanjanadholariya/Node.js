@@ -8,7 +8,7 @@ passport.use(new localStrategy({
 },async(email , password , cb) => {
     let adminRecord = await adminModel.findOne({email : email})
     if(adminRecord){
-        let matchPassword = await bcrypt.compare(passport , adminRecord.password)
+        let matchPassword = await bcrypt.compare(password , adminRecord.password)
         if(matchPassword){
             cb(null , adminRecord)
         }
