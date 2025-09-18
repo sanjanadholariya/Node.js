@@ -1,11 +1,15 @@
 const adminModel = require("../model/adminModel");
 const bcrypt = require("bcrypt");
 const mailMessage = require("../config/middleware/mailMessage");
+const passport = require("passport");
 
 module.exports.login = async (req, res) => {
   try {
-    
+    if(!req.isAuthenticated()){
       return res.render("login");
+    }else{
+      return res.redirect('/admin')
+    }
     
   } catch (err) {
     console.log(err);
@@ -153,7 +157,4 @@ module.exports.resetPassword = async(req,res)=>{
     return res.redirect('/')
     
   }
-  
-  
-  
 }
