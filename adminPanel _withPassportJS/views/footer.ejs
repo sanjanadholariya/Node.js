@@ -61,6 +61,59 @@
     <script src="/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
     <script src="/libs/quill/dist/quill.min.js"></script>
 
+        <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+
+  <% if(locals.flash.success && locals.flash.success.length > 0) { %>
+              <script>
+
+                const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+                });
+                Toast.fire({
+                icon: "success",
+                title: "<%=locals.flash.success%>"
+                });
+        
+    </script>
+
+    <% } %>
+
+    <% if(locals.flash.otp && locals.flash.otp.length>0) {%>
+        <script>
+            let timerInterval;
+                Swal.fire({
+                title: "<%=locals.flash.otp%>",
+                html: "I will close in <b></b> milliseconds.",
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading();
+                    const timer = Swal.getPopup().querySelector("b");
+                    timerInterval = setInterval(() => {
+                    timer.textContent = `${Swal.getTimerLeft()}`;
+                    }, 100);
+                },
+                willClose: () => {
+                    clearInterval(timerInterval);
+                }
+                }).then((result) => {
+                /* Read more about handling dismissals below */
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    console.log("I was closed by the timer");
+                }
+                });
+        </script>
+        <%}%>
+
+
 </body>
 
 </html>

@@ -26,12 +26,13 @@ passport.serializeUser((user , cb) => {
 })
 
 passport.deserializeUser(async(id , cb) => {
-    let adminRecord = adminModel.findById(id)
+    let adminRecord = await adminModel.findById(id)
     if(adminRecord){
         cb(null , adminRecord )
     }
 })
 
+// check krne k lia k admin authenticated h ya nahi
 
 passport.checkAdmin = async(req , res , next) => {
     if(req.isAuthenticated()){
@@ -39,6 +40,15 @@ passport.checkAdmin = async(req , res , next) => {
     }else{
         return res.redirect('/')
     }
+}
+
+// to create local user
+
+passport.setAuthenticateUser = (req , res , next) => {
+    if(req.user){
+        res.locals.user = req.user;
+    }
+    next();
 }
 
 module.exports = passport

@@ -6,11 +6,11 @@ const passport = require("passport");
 module.exports.login = async (req, res) => {
   try {
     if(!req.isAuthenticated()){
+     
       return res.render("login");
     }else{
       return res.redirect('/admin')
     }
-    
   } catch (err) {
     console.log(err);
     return res.redirect("/");
@@ -19,6 +19,7 @@ module.exports.login = async (req, res) => {
 
 module.exports.loginUser = async (req, res) => {
   try {
+    req.flash("success" , "Login Successfully")
     const admin = await adminModel.findOne({ email: req.body.email });
     if (admin) {
       if (
@@ -26,7 +27,7 @@ module.exports.loginUser = async (req, res) => {
         (await bcrypt.compare(req.body.password, admin.password))
       ) {
         // console.log("match !");
-        res.cookie("admin", admin);
+        // res.cookie("admin", admin);
         return res.redirect("/admin");
       } else {
         console.log("Invalid Credentials !!");
@@ -43,8 +44,16 @@ module.exports.loginUser = async (req, res) => {
 };
 
 module.exports.logoutUser = async (req, res) => {
-  res.clearCookie("admin");
-  return res.redirect("/");
+  req.session.destroy(err => {
+    if(err){
+      console.log(err);
+      
+    }
+    else{
+      return res.redirect("/");
+
+    }
+  })
 };
 
 module.exports.forgotPassword = async (req, res) => {
@@ -54,6 +63,7 @@ module.exports.forgotPassword = async (req, res) => {
 
 module.exports.checkOtpPage = async (req, res) => {
   try {
+    
     return res.render("checkOtpPage");
   } catch (err) {
     console.log(err);
@@ -70,7 +80,7 @@ module.exports.sendMailWithOTP = async (req, res) => {
     }
 
     let OTP = Math.floor(Math.random() * 1000);
-
+     req.flash("otp" , "OTP will send ")
     let msg = {
       from: "sanjanadholariya926@gmail.com",
       to: "khanparautsav@gmail.com",
@@ -81,7 +91,7 @@ module.exports.sendMailWithOTP = async (req, res) => {
     await mailMessage.sendEmail(msg);
     console.log("Send Mail With OTP !");
     console.log(req.body.email);
-
+    
     res.cookie("otp", OTP);
     res.cookie("email", req.body.email);
     return res.redirect("/checkOtpPage");
@@ -93,6 +103,7 @@ module.exports.sendMailWithOTP = async (req, res) => {
 
 module.exports.resetPasswordPage = async(req, res) => {
   try{
+   
     return res.render('resetPasswordPage')
   }
   catch(err){
