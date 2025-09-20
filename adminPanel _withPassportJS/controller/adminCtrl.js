@@ -9,14 +9,8 @@ const bcrypt = require('bcrypt')
 module.exports.admin = async (req, res) => {
   try {
     const admin = req.cookies.admin
-    if (req.cookies.admin && req.cookies.admin._id) {
-      return res.render('dashboard',
-        { admin }
-      )
-    }
-    else {
-      return res.redirect('/')
-    }
+    return res.render('dashboard')
+
   } catch (err) {
     console.log(err);
     return res.redirect('/')
@@ -84,14 +78,12 @@ module.exports.viewSingle = async (req, res) => {
 module.exports.addAdmin = async (req, res) => {
   try {
     const admin = req.cookies.admin
-    if (req.cookies.admin && req.cookies.admin._id) {
-      return res.render('addAdmin', {
-        admin
-      })
-    }
-    else {
-      return res.redirect('/')
-    }
+    // if (req.cookies.admin && req.cookies.admin._id) {
+      return res.render('addAdmin', )
+    // }
+    // else {
+    //   return res.redirect('/')
+    // }
   } catch (err) {
     console.log(err);
     return res.redirect('/admin')
@@ -406,27 +398,27 @@ module.exports.editBlog = async (req, res) => {
       let admin = req.cookies.admin
       let date = new Date()
       let single = await blogModel.findById(req.params.id)
-      if(req.file){
-        if(single.image){
+      if (req.file) {
+        if (single.image) {
           console.log("image Update");
           console.log(req.file.filename);
-          
-          
+
+
           let oldpath = path.join(__dirname, '../uploads/', single.image)
-            fs.unlinkSync(oldpath)
+          fs.unlinkSync(oldpath)
           req.body.image = req.file.filename
         }
-        else{
+        else {
           req.body.image = req.file.filename
         }
       }
       req.body.editDate = date
       console.log(req.body);
 
-      await blogModel.findByIdAndUpdate(req.params.id ,  req.body  )
-      
+      await blogModel.findByIdAndUpdate(req.params.id, req.body)
+
       return res.redirect('/admin/viewBlogPage')
-      
+
 
 
     }
@@ -451,7 +443,7 @@ module.exports.deleteBlog = async (req, res) => {
         console.log("image");
 
         let oldpath = path.join(__dirname, '../uploads/', single.image)
-            fs.unlinkSync(oldpath)
+        fs.unlinkSync(oldpath)
       }
       await blogModel.findByIdAndDelete(req.params.id)
 
