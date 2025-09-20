@@ -10,13 +10,18 @@ const db = require('./config/db')
 
 const passport = require('passport')
 
-const passportLocalStrategy = require('./config/middleware/localStrategy')
+const localStrategy = require('./config/middleware/localStrategy')
+
+const flashmsg = require('./config/middleware/flashmsg')
 
 app.set('view engine','ejs')
 
 app.set('views',path.join(__dirname,'views'))
 
 app.use(express.urlencoded())
+
+const flash = require('connect-flash')
+app.use(flash())
 
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
@@ -42,7 +47,13 @@ app.use(passport.session()) // connect session passport
 
 app.use(passport.initialize())  // to turn on passport 
 
+app.use(passport.setAuthenticateUser)
+
+app.use(flashmsg.flashMsg)
+
 app.use('/',require('./routes'))
+
+
 
 app.listen(port , (err)=>{
   err ? console.log(err) : console.log(`server is running on port ${port}`);

@@ -127,11 +127,27 @@ body {
       </div>
     </div>
 
+    <form class="form-inline" method="get" action="/admin/viewBlogPage">
+              <div class="input-group mb-5">
+                <input 
+                  type="text" 
+                  name="search" 
+                  value="<%= typeof search !== 'undefined' ? search : '' %>" 
+                  class="form-control" 
+                  placeholder="Search by Name, Email, City" 
+                  style="min-width: 250px;"
+                >
+                <div class="input-group-append">
+                  <button class="btn btn-primary" type="submit">Search</button>
+                </div>
+              </div>
+            </form>
+
     <!-- Blog Grid -->
     <div class="row">
       <% allBlog.map((val)=> { %>
         <div class="col-sm-6 col-md-4 col-lg-3">
-          <div class="card shadow-sm">
+          <div class="card shadow-sm h-100">
             <!-- Blog Image -->
             <img src="/uploads/<%= val.image %>" class="card-img-top" style="height:180px; object-fit:cover;" alt="Blog Image">
 

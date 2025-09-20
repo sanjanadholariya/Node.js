@@ -5,8 +5,8 @@
   <div class="page-breadcrumb bg-white shadow-sm mb-4 rounded">
     <div class="row align-items-center p-3">
       <div class="col-6 d-flex align-items-center">
-        <% if(admin.profile){ %>
-          <img src="/uploads/<%= admin.profile %>" 
+        <% if(locals.user.profile){ %>
+          <img src="/uploads/<%= locals.user.profile %>" 
                alt="profile pic" 
                class="rounded-circle shadow-sm mr-2"
                width="40" height="40" 
@@ -37,8 +37,8 @@
           
           <!-- Profile Header (background only for top area) -->
           <div class="bg-gradient-primary text-center py-4">
-            <% if(admin.profile){ %>
-              <img src="/uploads/<%= admin.profile %>" 
+            <% if(locals.user.profile){ %>
+              <img src="/uploads/<%= locals.user.profile %>" 
                    alt="profile pic" 
                    class="rounded-circle border border-4 border-white shadow-lg"
                    width="130" height="130" 
@@ -51,9 +51,9 @@
           </div>
 
 <div class="d-flex justify-content-between align-items-center px-4">
-  <h3 class="fw-bold mb-0 text-dark"><%= admin.name %></h3>
+  <h3 class="fw-bold mb-0 text-dark"><%= locals.user.name %></h3>
   <p class="mb-0 text-dark">
-    <i class="fa fa-envelope"></i> <%= admin.email %>
+    <i class="fa fa-envelope"></i> <%= locals.user.email %>
   </p>
 </div>
 
@@ -64,23 +64,23 @@
               <div class="col-md-6">
                 <div class="p-3 bg-white rounded shadow-sm h-100">
                   <h6 class="text-muted">Gender</h6>
-                  <p class="fw-bold text-dark mb-0"><%= admin.gender %></p>
+                  <p class="fw-bold text-dark mb-0"><%= locals.user.gender %></p>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="p-3 bg-white rounded shadow-sm h-100">
                   <h6 class="text-muted">City</h6>
-                  <p class="fw-bold text-dark mb-0"><%= admin.city %></p>
+                  <p class="fw-bold text-dark mb-0"><%= locals.user.city %></p>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="p-3 bg-white rounded shadow-sm h-100">
                   <h6 class="text-muted">Qualification</h6>
                   <p class="fw-bold text-dark mb-0">
-                    <% if(Array.isArray(admin.qualification)){ %>
-                      <%= admin.qualification.join(", ") %>
+                    <% if(Array.isArray(locals.user.qualification)){ %>
+                      <%= locals.user.qualification.join(", ") %>
                     <% } else { %>
-                      <%= admin.qualification %>
+                      <%= locals.user.qualification %>
                     <% } %>
                   </p>
                 </div>
@@ -88,7 +88,7 @@
               <div class="col-md-6">
                 <div class="p-3 bg-white rounded shadow-sm h-100">
                   <h6 class="text-muted">Message</h6>
-                  <p class="fw-bold text-dark mb-0"><%= admin.message %></p>
+                  <p class="fw-bold text-dark mb-0"><%= locals.user.message %></p>
                 </div>
               </div>
             </div>

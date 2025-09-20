@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-mongoose.connect('mongodb+srv://sanjana:sanjana123@cluster0.j5x75l5.mongodb.net/adminPanel')
+mongoose.connect('mongodb+srv://sanjana:sanjana123@cluster0.j5x75l5.mongodb.net/adminPanel-passport')
 
 const db = mongoose.connection;
 

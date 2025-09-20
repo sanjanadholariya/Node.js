@@ -349,11 +349,24 @@ module.exports.viewBlogPage = async (req, res) => {
   try {
     if (req.cookies.admin && req.cookies.admin._id) {
       let admin = req.cookies.admin
-      const allBlog = await blogModel.find()
-      return res.render('viewBlog', {
-        allBlog,
-        admin
-      })
+      var search = "";
+    if (req.query.search) {
+      search = req.query.search
+    }
+    let allBlog = await blogModel.find({
+      $or: [
+        {
+          title: { $regex: search, $options: 'i' }
+        },
+        {
+          description: { $regex: search, $options: 'i' }
+        }
+      ]
+    })
+    return res.render('viewBlog', {
+      allBlog,
+      admin
+    })
     } else {
       return res.redirect('/')
     }
