@@ -5,7 +5,10 @@ const sendMailMiddleware = require("../config/middleware/sendMailMiddleware");
 
 module.exports.login = async (req, res) => {
   try {
-    if (req.cookies.adminData == undefined || req.cookies.adminData._id == undefined) {
+    if (
+      req.cookies.adminData == undefined ||
+      req.cookies.adminData._id == undefined
+    ) {
       return res.render("login");
     } else {
       return res.redirect("/admin");
@@ -26,8 +29,8 @@ module.exports.loginAdmin = async (req, res) => {
       if (
         admin.email == req.body.email &&
         (await bcrypt.compare(req.body.password, admin.password))
-      ) {
-        res.cookie("admin", admin);
+      ){
+        res.cookie("adminData", admin);
         return res.redirect("/admin");
       } else {
         console.log("Invalid Credential !! ");
@@ -47,7 +50,10 @@ module.exports.loginAdmin = async (req, res) => {
 
 module.exports.forgotPasswordPage = async (req, res) => {
   try {
-    if (req.cookies.adminData == undefined || req.cookies.adminData._id == undefined) {
+    if (
+      req.cookies.adminData == undefined ||
+      req.cookies.adminData._id == undefined
+    ) {
       return res.render("forgotPasswordPage");
     } else {
       return res.redirect("/admin");
@@ -120,12 +126,12 @@ module.exports.resetPassword = async (req, res) => {
   try {
     let email = req.cookies.email;
     console.log(email);
-    
+
     console.log(req.body);
     if (req.body.newPassword == req.body.confirmPassword) {
       let setNewPassword = req.body.newPassword;
       console.log(setNewPassword);
-      let admin = await adminModel.findOne({email : email})
+      let admin = await adminModel.findOne({ email: email });
       console.log(admin);
       await res.clearCookie(email);
       await adminModel.findByIdAndUpdate(admin._id, {

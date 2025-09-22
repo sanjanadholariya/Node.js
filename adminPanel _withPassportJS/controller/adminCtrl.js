@@ -11,10 +11,10 @@ const bcrypt = require('bcrypt')
 module.exports.admin = async (req, res) => {
   try {
     //  req.flash("success" , "Login Successfully")
-    const admin = req.cookies.admin
+    // const admin = req.cookies.admin
     return res.render('dashboard')
-    // console.log("user: ",req.user);
-    return res.render('dashboard')
+    // console.log("user: " ,req.user);
+    // return res.render('dashboard')
   } catch (err) {
     console.log(err);
     return res.redirect('/')
@@ -349,8 +349,12 @@ module.exports.viewBlogPage = async (req, res) => {
 
 
     var search = "";
+    var filter = "";
     if (req.query.search) {
       search = req.query.search
+    }
+    if(req.query.filter){
+      filter = req.query.filter
     }
     let allBlog = await blogModel.find({
       $or: [
@@ -359,9 +363,21 @@ module.exports.viewBlogPage = async (req, res) => {
         },
         {
           description: { $regex: search, $options: 'i' }
-        }
+        },
       ]
     })
+
+    if(filter){
+       allBlog = await blogModel.find({
+        $or : [
+          {
+            category : {$regex : filter , $options : 'i'}
+          }
+        ]
+      })
+    }
+    
+
     return res.render('viewBlog', {
       allBlog
     })
