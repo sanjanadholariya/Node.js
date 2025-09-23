@@ -116,10 +116,20 @@ header .btn:hover {
           <!-- Blog Image -->
           <img src="/uploads/<%= single.image %>" class="card-img-top" style="height:400px; object-fit:cover;" alt="Blog Image">
 
-          <p class="card-body"><strong>Create Date :-</strong>   <%=single.date%></p>
+          <p class="card-body"><strong>Create Date :-</strong>   <%= new Date(single.date).toLocaleDateString('en-GB', { 
+        weekday: 'long', 
+        day: '2-digit', 
+        month: 'short', 
+        year: 'numeric' 
+      }) %></p>
 
           <% if(single.date!=single.editDate){ %>
-            <p class="card-body"><strong>Edit Date :-</strong>  <%=single.editDate%></p>
+            <p class="card-body"><strong>Edit Date :-</strong> <%= new Date(single.date).toLocaleDateString('en-GB', { 
+        weekday: 'long', 
+        day: '2-digit', 
+        month: 'short', 
+        year: 'numeric' 
+      }) %></p>
 
             <%}%>
 

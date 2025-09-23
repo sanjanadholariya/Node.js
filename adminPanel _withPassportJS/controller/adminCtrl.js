@@ -376,6 +376,9 @@ module.exports.viewBlogPage = async (req, res) => {
         ]
       })
     }
+     if(req.query.reset){
+        allBlog = await blogModel.find();
+    }
     
 
     return res.render('viewBlog', {
