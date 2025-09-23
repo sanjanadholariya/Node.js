@@ -16,11 +16,11 @@
         <div class="page-breadcrumb">
             <div class="row">
                 <div class="col-12 d-flex no-block align-items-center">
-                    <h4 class="page-title">Tables</h4>
+                    <h4 class="page-title">Admins</h4>
                     <div class="ml-auto text-right">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                               <li class="breadcrumb-item"><a href="/admin">Home</a></li>
+                                <li class="breadcrumb-item"><a href="/admin">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Library</li>
                             </ol>
                         </nav>
@@ -42,28 +42,27 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title m-b-0">Static Table</h5>
+                            <h5 class="card-title m-b-0">Admin List</h5>
                         </div>
 
                         <!-- search -->
 
-                         <form class="form-inline" method="get" action="/admin/view">
-              <div class="input-group">
-                <input 
-                  type="text" 
-                  name="search" 
-                  value="<%= typeof search !== 'undefined' ? search : '' %>" 
-                  class="form-control" 
-                  placeholder="Search by Name, Email, City" 
-                  style="min-width: 250px;"
-                >
-                <div class="input-group-append">
-                  <button class="btn btn-primary" type="submit">Search</button>
-                </div>
-              </div>
-            </form>
+                        <form class="form-inline" method="get" action="/admin/view">
+                            <div class="input-group">
+                                <input type="text" name="search"
+                                    value="<%= typeof search !== 'undefined' ? search : '' %>" class="form-control"
+                                    placeholder="Search by Name, Email, City" style="min-width: 250px;">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit">Search</button>
+                                </div>
+                                <div class="col-md-2 d-grid">
+                                    <input class="btn btn-secondary" type="submit" value="Reset" name="reset">
+                                </div>
 
-                        
+                            </div>
+                        </form>
+
+
 
                         <table class="table">
                             <thead>

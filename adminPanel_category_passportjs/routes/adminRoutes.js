@@ -8,7 +8,6 @@ const adminModel = require('../model/adminModel')
 
 const blogModel = require('../model/blogModel')
 
-const categoryModel = require('../model/categoryModel')
 
 routes.get('/',adminCtrl.admin)
 routes.get('/view',adminCtrl.view)
@@ -21,6 +20,8 @@ routes.get('/viewSingle/:id',adminCtrl.viewSingle)
 routes.get('/changePasswordPage', adminCtrl.changePasswordPage)
 routes.post('/changePassword',adminCtrl.changePassword)
 routes.get('/viewProfile',adminCtrl.viewProfile)
+
+
 routes.get('/addBlogPage',adminCtrl.addBlogPage)
 routes.post('/addBlog',blogModel.imageUpload, adminCtrl.addBlog)
 routes.get('/viewBlogPage',adminCtrl.viewBlogPage)
@@ -28,10 +29,6 @@ routes.get('/viewSingleBlog/:id',adminCtrl.viewSingleBlog)
 routes.get('/editBlogPage/:id',adminCtrl.editBlogPage)
 routes.post('/editBlog/:id',blogModel.imageUpload,adminCtrl.editBlog)
 routes.get('/deleteBlog/:id',adminCtrl.deleteBlog)
-routes.get('/addCategoryPage',adminCtrl.addCategoryPage)
-routes.post('/addCategory',categoryModel.imageUpload,adminCtrl.addCategory)
-routes.get('/viewCategoryPage',adminCtrl.viewCategoryPage)
-routes.get('/deleteCategory/:id',adminCtrl.deleteCategory)
-routes.get('/editCategoryPage/:id',adminCtrl.editCategoryPage)
-routes.post('/editCategory/:id',categoryModel.imageUpload,adminCtrl.editCategory)
+
+
 module.exports = routes

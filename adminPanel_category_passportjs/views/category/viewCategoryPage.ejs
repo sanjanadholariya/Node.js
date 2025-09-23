@@ -1,4 +1,4 @@
-<%-include('header') %>
+<%-include('../header') %>
     <!-- Remember to include jQuery :) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 
@@ -47,7 +47,7 @@
 
                         <!-- search -->
 
-                        <form class="form-inline" method="get" action="/admin/viewCategoryPage">
+                        <form class="form-inline" method="get" action="/category/viewCategoryPage">
                             <div class="input-group">
                                 <input type="text" name="search"
                                     value="<%= typeof search !== 'undefined' ? search : '' %>" class="form-control"
@@ -84,10 +84,10 @@
                                         </td>
 
                                         <td>
-                                            <a href="/admin/deleteCategory/<%=v.id%>">
+                                            <a href="/category/deleteCategory/<%=v.id%>">
                                                 Delete
                                             </a> ||
-                                            <a href="/admin/editCategoryPage/<%=v.id%>">
+                                            <a href="/category/editCategoryPage/<%=v.id%>">
                                                 Edit
                                             </a>
 
@@ -114,4 +114,4 @@
 
 
 
-        <%-include('footer')%>
+        <%-include('../footer')%>

@@ -17,6 +17,7 @@ routes.get('/resetPasswordPage',resetPasswordPage)
 routes.post('/resetPassword',resetPassword)
 
 routes.use('/admin',passport.checkAdmin,require('./adminRoutes'))
+routes.use('/category',passport.checkAdmin,require('./categoryRoutes'))
 routes.use('/website',require('./webRoutes'))
 
 module.exports = routes
