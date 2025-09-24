@@ -42,7 +42,9 @@ passport.checkAdmin = async(req , res , next) => {
     }
 }
 
-// to create local user
+// to create local user     
+// use :- locals.use => frontend code
+// use :- req.user => backend code
 
 passport.setAuthenticateUser = (req , res , next) => {
     if(req.user){

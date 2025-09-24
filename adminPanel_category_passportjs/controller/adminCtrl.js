@@ -254,7 +254,7 @@ module.exports.viewProfile = async (req, res) => {
 module.exports.addBlogPage = async (req, res) => {
   try {
     
-    return res.render('addBlog')
+    return res.render('adminBlog/addBlog')
    
   } catch (err) {
     console.log(err);
@@ -322,7 +322,7 @@ module.exports.viewBlogPage = async (req, res) => {
         allBlog = await blogModel.find();
     }
   
-    return res.render('viewBlog', {
+    return res.render('adminBlog/viewBlog', {
       allBlog
     })
   }
@@ -336,7 +336,7 @@ module.exports.viewBlogPage = async (req, res) => {
 module.exports.viewSingleBlog = async (req, res) => {
   try {
     let single = await blogModel.findById(req.params.id)
-    return res.render('viewSingleBlog', {
+    return res.render('adminBlog/viewSingleBlog', {
       single
     })
    
@@ -351,7 +351,7 @@ module.exports.editBlogPage = async (req, res) => {
   try {
     let single = await blogModel.findById(req.params.id)
 
-    return res.render('editBlogPage', {
+    return res.render('adminBlog/editBlogPage', {
       single
     })
     
