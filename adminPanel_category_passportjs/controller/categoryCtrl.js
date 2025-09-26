@@ -1,6 +1,6 @@
 
 const categoryModel = require('../model/categoryModel')
-
+const subcategoryModel = require('../model/subcategoryModel')
 const fs = require('fs')
 const path = require('path')
 
@@ -64,6 +64,7 @@ module.exports.deleteCategory = async(req , res) => {
       fs.unlinkSync(path.join(__dirname , '../uploads/categoryImage/', single.categoryImage))
     }
     await categoryModel.findByIdAndDelete(req.params.id)
+    await subcategoryModel.deleteMany({category : req.params.id})
     return res.redirect('/category/viewCategoryPage')
     
   }catch(err){
