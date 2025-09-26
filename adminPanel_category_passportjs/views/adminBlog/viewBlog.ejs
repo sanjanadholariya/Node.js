@@ -132,7 +132,7 @@
             <input type="text" name="search" value="<%= typeof search !== 'undefined' ? search : '' %>"
               class="form-control" placeholder="Search by Title or Description" style="min-width: 250px;">
 
-            <select name="filter" id="" class="form-control">
+            <select name="filter" id="" class="form-control" onchange="this.form.submit()">
               <option value="">--- Filter Category ---</option>
               <option value="technology">Technology</option>
               <option value="history">History</option>

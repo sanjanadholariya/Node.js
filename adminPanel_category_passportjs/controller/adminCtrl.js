@@ -323,7 +323,8 @@ module.exports.viewBlogPage = async (req, res) => {
     }
   
     return res.render('adminBlog/viewBlog', {
-      allBlog
+      allBlog,
+      filter
     })
   }
  catch (err) {

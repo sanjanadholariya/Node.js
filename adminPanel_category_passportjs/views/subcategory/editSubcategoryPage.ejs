@@ -9,7 +9,7 @@
         <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">Add Sub Category</h4>
+                        <h4 class="page-title">Edit Sub Category</h4>
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
@@ -35,7 +35,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="card">
-                        <form class="form-horizontal" action="/subcategory/addSubcategory" method="post"
+                        <form class="form-horizontal" action="/subcategory/editSubcategory/<%=single._id%>" method="post"
                             >
                             <div class="card-body">
 
@@ -43,11 +43,11 @@
                                     <label for="fname"
                                         class="col-sm-3 text-right control-label col-form-label">Category</label>
                                     <div class="col-sm-9">
-                                        <select name="category" id="">
+                                        <select name="category" id="" disabled>
                                             <option value="">--- Select Category ---</option>
-                                            <%category.map((v,i)=>{%>
-                                                <option value="<%=v._id%>"><%=v.title%></option>
-                                            <%})%>
+                                            
+                                                <option value="<%=single.category.id%>" selected><%=single.category.title%></option>
+                                           
                                         </select>
                                     </div>
                                 </div>
@@ -57,7 +57,7 @@
                                         class="col-sm-3 text-right control-label col-form-label">Sub Category</label>
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control" name="subcategory" 
-                                            placeholder="Enter Sub Category Name">
+                                            placeholder="Enter Sub Category Name" value="<%=single.subcategory%>">
                                     </div>
                                 </div>
 
@@ -67,7 +67,7 @@
                            
                             <div class="border-top">
                                 <div class="card-body col-sm-3 text-right ">
-                                    <input type="submit" value="Add">
+                                    <input type="submit" value="Edit">
                                 </div>
                             </div>
                     </div>

@@ -74,6 +74,17 @@
 
     <% } %>
 
+<% if(locals.flash.error && locals.flash.error.length> 0) { %>
+        <script>
+            Swal.fire({
+                icon: "error",
+                text: "ooops...!",
+                title: "<%=locals.flash.error%>",    
+            });
+
+        </script>
+            <% } %>
+
 
 
         </body>
