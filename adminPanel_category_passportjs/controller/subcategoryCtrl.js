@@ -1,5 +1,7 @@
 const subcategoryModel = require("../model/subcategoryModel");
 const categoryModel = require("../model/categoryModel");
+const extraCategoryModel = require('../model/extraCategoryModel');
+const subcategory = require("../model/subcategoryModel");
 
 module.exports.addSubCategoryPage = async (req, res) => {
   try {
@@ -38,9 +40,9 @@ module.exports.viewSubcategoryPage = async (req, res) => {
     let search = "";
     if (req.query.search) {
       search = req.query.search.toLowerCase();
-      
+
     }
-    console.log("Seaqrch: ", search);
+    // console.log("Search: ", search);
     let subcategory = await subcategoryModel.find({
         $or: [
           {
@@ -71,6 +73,7 @@ module.exports.deleteSubcategory = async (req, res) => {
   try {
     console.log(req.params.id);
     await subcategoryModel.findByIdAndDelete(req.params.id);
+    await extraCategoryModel.deleteMany({subcategory : req.params.id})
     return res.redirect("/subcategory/viewSubcategoryPage");
   } catch (err) {
     console.log(err);
