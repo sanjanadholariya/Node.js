@@ -18,9 +18,26 @@ module.exports.addExtraCategoryPage = async (req, res) => {
   }
 };
 
+// API for dependent dropdown in add extra category page 
+// that is work for dependency of subcategory on category 
+
+module.exports.extraSubCategoryDropdown = async(req , res) => {
+  try{
+    console.log(req.query.category)
+    const subcategory = await subcategoryModel.find({category : req.query.category});
+    // console.log(subcategory)
+
+    return res.json({subcategories:subcategory , message:"success"})
+
+  }catch(err){
+    console.log(err)
+    return res.redirect('/admin')
+  }
+}
+
 module.exports.addExtraCategory = async (req, res) => {
   try {
-    console.log(req.body);
+    // console.log(req.body);
     await extraCategoryModel.create(req.body);
     return res.redirect("/extraCategory/viewExtraCategoryPage");
   } catch (err) {
@@ -35,7 +52,7 @@ module.exports.viewExtraCategoryPage = async (req, res) => {
       .find()
       .populate("category")
       .populate("subcategory");
-    console.log(extraCategory);
+      // console.log(extraCategory);
     return res.render("extraCategory/viewExtraCategory", { extraCategory });
   } catch (err) {
     console.log(err);

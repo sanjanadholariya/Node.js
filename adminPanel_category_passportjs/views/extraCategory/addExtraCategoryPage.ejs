@@ -42,7 +42,7 @@
                                     <label for="fname"
                                         class="col-sm-3 text-right control-label col-form-label">Category</label>
                                     <div class="col-sm-9">
-                                        <select name="category" id="">
+                                        <select name="category" id="category">
                                             <option value="">--- Select Category ---</option>
                                             <%category.map((v,i)=>{%>
                                                 <option value="<%=v._id%>">
@@ -60,7 +60,7 @@
                                         class="col-sm-3 text-right control-label col-form-label">Sub Category</label>
 
                                     <div class="col-sm-9">
-                                        <select name="subcategory" id="">
+                                        <select name="subcategory" id="subcategory">
                                             <option value="">--- Select Sub Category ---</option>
                                             <%subcategory.map((v,i)=>{%>
                                                 <option value="<%=v._id%>">
@@ -121,3 +121,31 @@
     <!-- ============================================================== -->
 
     <%-include('../footer')%>
+
+    <script>
+        document.addEventListener('DOMContentLoaded',() => {
+            let category = document.querySelector('#category');
+            let subcategory = document.querySelector('#subcategory')
+
+            console.log(category)
+
+            category.addEventListener('change' , () => {
+                let categoryId = category.value
+                // console.log(categoryId)
+                subcategory.innerHTML = `<option>--- select subcategory ---</option>`
+                fetch(`/extraCategory/subcategory?category=${categoryId}`)
+                .then(res => res.json())
+                .then(data => {
+                    // console.log(data.subcategories)
+                    data.subcategories.forEach(value => {
+                        let option = document.createElement('option');
+                        option.value = value._id
+                        option.innerHTML = value.subcategory;
+                        subcategory.append(option);
+                    });
+                })
+                .catch(err => console.log(err));
+            })
+
+        })
+    </script>

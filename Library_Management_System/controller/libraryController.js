@@ -36,8 +36,6 @@ module.exports.deleteBook = async(req,res) => {
 
 module.exports.edit = async(req,res) => {
   const single = await libraryModel.findById(req.params.id)
-  console.log(single.genre);
-  
   return res.render('editBook',{
     single
   })
