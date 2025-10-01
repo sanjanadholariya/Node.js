@@ -19,6 +19,7 @@ routes.use('/admin',passport.checkAdmin,require('./adminRoutes'))
 routes.use('/category',passport.checkAdmin,require('./categoryRoutes'))
 routes.use('/subcategory',passport.checkAdmin,require('./subcategoryRoutes'))
 routes.use('/extraCategory',passport.checkAdmin,require('./extraCategoryRoutes'))
+routes.use('/product',passport.checkAdmin,require('./productRoutes'))
 routes.use('/website',require('./webRoutes'))
 
 module.exports = routes

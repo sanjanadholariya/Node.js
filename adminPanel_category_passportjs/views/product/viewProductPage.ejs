@@ -1,0 +1,61 @@
+<%- include('../header') %>
+
+<div class="page-wrapper">
+    <div class="container-fluid py-5">
+
+        <!-- Page Title -->
+        <div class="row mb-4">
+            <div class="col-12 d-flex justify-content-between align-items-center">
+                <h4 class="page-title">Product List</h4>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="/admin">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Products</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Product Cards -->
+        <div class="row g-4">
+            <% allProduct.map((val) => { %>
+                <div class="col-sm-6 col-md-4 col-lg-3 d-flex">
+                    <div class="card shadow-sm border-0 flex-fill h-100">
+                        <div class="overflow-hidden" style="height: 180px;">
+                            <img src="/uploads/productImage/<%= val.productImage %>" 
+                                 class="w-100 h-100" 
+                                 style="object-fit: cover;" 
+                                 alt="<%= val.productName %>">
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="card-title text-dark fw-bold mb-0" style="font-size: 1rem;">
+                                    <%= val.productName %>
+                                </h5>
+                                <span class="text-success fw-bold" style="font-size: 0.9rem;">
+                                    $<%= val.price %>
+                                </span>
+                            </div>
+
+                            <p class="card-text text-secondary small flex-grow-1 mb-2" style="font-size:0.85rem;">
+                                <%= val.description.length > 100 ? val.description.substring(0, 100) + "..." : val.description %>
+                            </p>
+
+                            <span class="text-muted mb-3" style="font-size:0.85rem;">
+                                Quantity: <%= val.quantity %>
+                            </span>
+
+                            <a href="/product/viewSingleProductPage/<%= val._id %>" 
+                               class="btn btn-primary btn-sm mt-auto">
+                               View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+
+    </div>
+</div>
+
+<%- include('../footer') %>
