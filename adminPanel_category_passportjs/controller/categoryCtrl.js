@@ -2,6 +2,7 @@
 const categoryModel = require('../model/categoryModel')
 const subcategoryModel = require('../model/subcategoryModel')
 const extraCategoryModel = require('../model/extraCategoryModel')
+const productModel = require('../model/productModel')
 const fs = require('fs')
 const path = require('path')
 
@@ -67,6 +68,7 @@ module.exports.deleteCategory = async(req , res) => {
     await categoryModel.findByIdAndDelete(req.params.id)
     await subcategoryModel.deleteMany({category : req.params.id})
     await extraCategoryModel.deleteMany({category : req.params.id})
+    await productModel.deleteMany({category : req.params.id})
     return res.redirect('/category/viewCategoryPage')
     
   }catch(err){
