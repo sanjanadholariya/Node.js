@@ -1,0 +1,139 @@
+<%-include('header')%>
+     <!-- MAIN CONTENT-->
+            <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row">
+                            
+                            <div class="col-lg-8 m-auto">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <strong>Basic Form</strong> Elements
+                                    </div>
+                                    <div class="card-body card-body">
+                                        <form action="/admin/editAdmin/<%=single._id%>" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                           
+                                            <div class="row mb-3">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label" >Name</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="text" id="text-input" name="name" placeholder="Enter Your Name here..." value="<%=single.name%>" class="form-control">
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col col-md-3">
+                                                    <label for="email-input" class=" form-control-label">Email</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="email" id="email-input" name="email" placeholder="Enter Your Email..." value="<%=single.email%>" class="form-control">
+                                                </div>
+                                            </div>
+                                            
+                                            
+                                            <div class="row mb-3">
+                                                <div class="col col-md-3">
+                                                    <label for="textarea-input" class=" form-control-label">About </label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <textarea name="about" id="textarea-input" rows="9" placeholder="About Yourself" value="<%=single.about%>" class="form-control"></textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="row mb-3">
+                                                <div class="col col-md-3">
+                                                    <label for="select" class=" form-control-label">City</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <select name="city"  class="form-select">
+                                                        <option value="" selected>---- Select City ----</option>
+                                                        <option value="surat" <% if(single.city == "surat"){ %> selected <%}%>>Surat</option>
+                                                        <option value="ahemdabad" <% if(single.city == "ahemdabad"){ %> selected <%}%>  >Ahemdabad</option>
+                                                        <option value="vapi" <% if(single.city == "vapi"){ %> selected <%}%> >Vapi</option>
+                                                        <option value="jamnagar"<% if(single.city == "jamnagar"){ %> selected <%}%> >Jamnagar</option>
+                                                        
+                                                    </select>
+                                                </div>
+                                            </div>
+
+
+                                           
+                                           
+                                           
+                                            
+                                           
+                                            <div class="row mb-3">
+                                                <div class="col col-md-3">
+                                                    <label class=" form-control-label">Gender</label>
+                                                </div>
+                                                <div class="col col-md-9">
+                                                    <div class="form-check form-check-inline">
+                                                        <input type="radio" id="inline-radio1" name="gender" value="male" <% if(single.gender == "male"){ %> checked <%}%>  class="form-check-input">
+                                                        <label for="inline-radio1" class="form-check-label">Male</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input type="radio" id="inline-radio2" name="gender" value="female" <% if(single.gender == "female"){ %> checked <%}%>  class="form-check-input">
+                                                        <label for="inline-radio2" class="form-check-label">Female</label>
+                                                    </div>
+                                                   
+                                                </div>
+                                            </div>
+
+                                            
+                                            <div class="row mb-3">
+                                                <div class="col col-md-3">
+                                                    <label class=" form-control-label">Education</label>
+                                                </div>
+                                                <div class="col col-md-9">
+                                                    <div class="form-check form-check-inline">
+                                                        <input type="checkbox" id="inline-checkbox1" name="education" value="10th" class="form-check-input" <% if(single.education.includes("10th")) { %> checked <%}%>>
+                                                        <label for="inline-checkbox1" class="form-check-label">10th</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input type="checkbox" id="inline-checkbox2" name="education" value="12th" class="form-check-input" <% if(single.education.includes("12th")) { %> checked <%}%>>
+                                                        <label for="inline-checkbox2" class="form-check-label">12th</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input type="checkbox" id="inline-checkbox3" name="education" value="Graduate" class="form-check-input" <% if(single.education.includes("graduate")) { %> checked <%}%>>
+                                                        <label for="inline-checkbox3" class="form-check-label">Graduation</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col col-md-3">
+                                                    <label for="file-input" class=" form-control-label">Profile Picture</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="file" id="file-input" name="profile" class="form-control">
+                                                     <img src="<%=single.profile%>" width="80px" height="80px" alt="profile">
+                                                </div>
+                                               
+                                            </div>
+                                            <div class="card-footer">
+                                        <input type="submit" value="Edit" class="btn btn-primary btn-sm">
+                                            
+                                       
+                                        
+                                    </div>
+                                        </form>
+                                    </div>
+                                    
+                                </div>
+                                
+                            </div>
+
+                            
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="copyright">
+                                    <p>Copyright © 2025 Colorlib. All rights reserved. Template by <a href="https://colorlib.com" rel="nofollow" target="_blank">Colorlib</a>.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+<%-include('footer')%>
