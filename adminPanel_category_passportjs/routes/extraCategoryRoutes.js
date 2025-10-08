@@ -1,6 +1,5 @@
 const express = require('express');
-const { route } = require('./adminRoutes');
-const {  addExtraCategoryPage, addExtraCategory, viewExtraCategoryPage, deleteExtraCategory, editExtraCategoryPage, editExtraCategory, extraSubCategoryDropdown } = require('../controller/extracategoryCtrl');
+const {  addExtraCategoryPage, addExtraCategory, viewExtraCategoryPage, deleteExtraCategory, editExtraCategoryPage, editExtraCategory, extraSubCategoryDropdown } = require('../controller/extraCategoryCtrl')
 
 const routes = express.Router()
 
