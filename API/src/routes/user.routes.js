@@ -1,9 +1,9 @@
 const express = require('express');
-const { registerUser } = require('../controller/user.controller');
+const imageUpload = require('../middleware/imageUpload');
+const { allUser } = require('../controller/user.controller');
 
 const routes = express.Router();
 
-// routes.get('/registerUser',registerUser)
-routes.post('/registerUser',registerUser)
+routes.get('/allUser',allUser)
 
 module.exports = routes;
