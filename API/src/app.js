@@ -6,8 +6,11 @@ const port = 8001;
 
 const db = require('./config/db')
 
+const path = require('path')
+
 app.use(express.urlencoded())
 app.use(express.json())
+app.use('/uploads',express.static(path.join(__dirname,'/uploads')))
 
 app.use('/api',require('./routes/index.routes'))
 

@@ -19,7 +19,7 @@ const userSchema = mongoose.Schema({
         enum : ["Male","Female"]
     }
 },{
-    timestamps : false,
+    timestamps : true,
     versionKey : false
 })
 
