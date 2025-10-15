@@ -1,15 +1,7 @@
-const express = require('express');
-const { registerAdmin, loginAdmin, myProfile, editAdmin, deleteAdmin } = require('../controller/admin.controller');
-const imageUpload = require('../middleware/imageUpload');
-const verifyToken = require('../middleware/verifyToken');
+const express = require('express')
 
-const routes = express()
+const routes = express.Router();
 
-routes.post('/registerAdmin',imageUpload.single('profile'),registerAdmin)
-routes.post('/loginAdmin',loginAdmin)
-routes.get('/myProfile',verifyToken,myProfile)
-routes.put('/editAdmin',verifyToken,imageUpload.single('profile'),editAdmin)
-routes.delete('/deleteAdmin',imageUpload.single('profile'),deleteAdmin)
-
+routes.use('/admin',require('./admin.routes'))
 
 module.exports = routes;
