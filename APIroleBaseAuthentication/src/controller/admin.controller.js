@@ -168,7 +168,7 @@ module.exports.addManager = async (req, res) => {
 module.exports.allManager = async (Req, res) => {
   try {
     const allManager = await managerModel
-      .find({ role: "Manager" , isDelete: false})
+      .find({ role: "Manager", isDelete: false })
       .select("-password");
     return res.json({
       message: "All Manager Success",
@@ -184,46 +184,49 @@ module.exports.allManager = async (Req, res) => {
 module.exports.editManager = async (req, res) => {
   try {
     const id = req.query.id;
-    console.log(req.body)
-    console.log(req.file)
-    const single = await managerModel.findById(id).select('-password');
-    console.log(single)
+    console.log(req.body);
+    console.log(req.file);
+    const single = await managerModel.findById(id).select("-password");
+    console.log(single);
     if (!single) {
-      return res.json({ message: "No Data Found By This Id", status: 404 })
+      return res.json({ message: "No Data Found By This Id", status: 404 });
     }
     if (req.file) {
       if (single.profile) {
-        oldPath = `..${single.profile}`
-        fs.unlinkSync(path.join(__dirname, oldPath))
-        console.log("Profile Delete")
+        oldPath = `..${single.profile}`;
+        fs.unlinkSync(path.join(__dirname, oldPath));
+        console.log("Profile Delete");
       }
-      req.body.profile = `/uploads/${req.file.filename}`
+      req.body.profile = `/uploads/${req.file.filename}`;
     }
-    await managerModel.findByIdAndUpdate(id, req.body, { new: true })
-    const editedManager = await managerModel.findById(id)
-    return res.json({ message: "Edit Manager Success", status: 200, data: editedManager })
+    await managerModel.findByIdAndUpdate(id, req.body, { new: true });
+    const editedManager = await managerModel.findById(id);
+    return res.json({
+      message: "Edit Manager Success",
+      status: 200,
+      data: editedManager,
+    });
   } catch (error) {
-    console.log(error)
-    return res.json({ message: "Internal Server Error", status: 501 })
+    console.log(error);
+    return res.json({ message: "Internal Server Error", status: 501 });
   }
 };
 
-
 module.exports.deleteManager = async (req, res) => {
   try {
-    const id = req.query.id
-    const single = await managerModel.findById(id)
-    console.log(single)
+    const id = req.query.id;
+    const single = await managerModel.findById(id);
+    console.log(single);
     if (!single) {
-      return res.json({ message: "Data Not Found !", status: 404 })
+      return res.json({ message: "Data Not Found !", status: 404 });
     }
-    if(single.isDelete){
-      return res.json({message : "Already Deleted This Manager",status : 501})
+    if (single.isDelete) {
+      return res.json({ message: "Already Deleted This Manager", status: 501 });
     }
-    await managerModel.findByIdAndUpdate(id, { isDelete: true }, { new: true })
-    return res.json({ message: "Delete Manager Success", status: 200 })
+    await managerModel.findByIdAndUpdate(id, { isDelete: true }, { new: true });
+    return res.json({ message: "Delete Manager Success", status: 200 });
   } catch (error) {
-    console.log(error)
-    return res.json({ message: "Internal Server Error", status: 501 })
+    console.log(error);
+    return res.json({ message: "Internal Server Error", status: 501 });
   }
-}
+};
