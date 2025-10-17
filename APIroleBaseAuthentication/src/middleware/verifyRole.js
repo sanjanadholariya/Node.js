@@ -1,7 +1,7 @@
 const verifyRole = (...role) => {
     return (req  , res, next) => {
         if(!role.includes(req.user.role)){
-            return res.json({Message : "Access denied. You don't have permission for this action."})
+            return res.status(403).json({Message : "Access denied. You don't have permission for this action."})
         }
         next();
     }
