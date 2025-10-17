@@ -30,6 +30,31 @@ module.exports.loginManager = async(req , res) => {
   }
 }
 
+module.exports.changeManagerPassword = async(req , res) => {
+  try {
+    const id = req.query.id
+    const manager = await managerModel.findById(id)
+    if(manager && manager.isDelete == false){
+      const checkPass = await bcrypt.compare(req.body.cPassword , manager.password)
+      if(checkPass){
+        const newPassword = await bcrypt.hash(req.body.password , 10)
+        await managerModel.findByIdAndUpdate(id , {password : newPassword})
+      }else{
+        return res.status(400).json({message : "Password Is Incorrect !"})
+      }
+      return res.status(200).json({message : "Password Change Successfully "})
+    }
+    else{
+      return res.status(404).json({message : "Manager Not Found !"})
+    }
+    console.log(manager)
+  } catch (error) {
+    console.log(error)
+    return res.status(500).json({message : "Internal Server Error"})
+  }
+}
+
+
 // Employee's action which manager can access
 
 module.exports.addEmployee = async(req , res) => {
@@ -45,10 +70,10 @@ module.exports.addEmployee = async(req , res) => {
     }
     const mailMsg = {
           from: "sanjanadholariya926@gmail.com",
-          to: "jitendradholariya871@gmail.com",
+          to: "ravi.beetonz@gmail.com",
           subject: "Registration",
-          html: `<p>Hello...!!</p>
-        <p>Your Password Is ${req.body.password}.</p>`,
+          html: `<p>Hello ${req.body.name} 😊</p>
+        <p>Your Password Is ${req.body.password} For Login Into Your Account. You Can Change It Later.</p>`,
         }
         await sendEmail(mailMsg);
     req.body.password = await bcrypt.hash(req.body.password , 10)
@@ -64,3 +89,12 @@ module.exports.addEmployee = async(req , res) => {
   }
 }
 
+module.exports.deleteEmployee = async(req , res) => {
+  try {
+    
+    console.log("delete Employee")
+  } catch (error) {
+    console.log(error)
+    return res.status(500).json({message : "Internal Server Error"})
+  }
+}
