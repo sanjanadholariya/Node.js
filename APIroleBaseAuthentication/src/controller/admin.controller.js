@@ -186,7 +186,7 @@ module.exports.editManager = async (req, res) => {
         const oldPath = path.join(__dirname, '..', single.profile); 
         if (fs.existsSync(oldPath)) {
           fs.unlinkSync(oldPath);
-          console.log("Old profile deleted!");
+          // console.log("Old profile deleted!");
         }
       }
       req.body.profile = `/uploads/${req.file.filename}`;

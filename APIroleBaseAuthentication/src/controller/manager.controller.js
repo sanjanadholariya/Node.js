@@ -2,6 +2,8 @@ const managerModel = require('../model/usersModel')
 const employeeModel = require('../model/usersModel')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
+const path = require('path')
+const fs = require('fs')
 
 
 module.exports.loginManager = async(req , res) => {
@@ -64,3 +66,58 @@ module.exports.addEmployee = async(req , res) => {
   }
 }
 
+module.exports.allEmployee = async(req , res) => {
+  try {
+    const allEmployee = await employeeModel.find({isDelete : false , role : "Employee"}).select('-password');
+    return res.status(200).json({message : "All Employee Fetch Success",data : allEmployee})
+  } catch (error) {
+    console.log(error)
+    return res.status(500).json({message : "Internal Server Error"})
+  }
+}
+
+module.exports.editEmployee = async(req , res) => {
+  try {
+    const id = req.query.id;
+    console.log(id)
+
+    const employee = await employeeModel.findById(id)
+    console.log(req.body)
+
+    if(req.file){
+      if(employee.profile){
+        const oldPath = path.join(__dirname , '..' , employee.profile)
+        if(fs.existsSync(oldPath)){
+          fs.unlinkSync(oldPath)
+        }
+      }
+      req.body.profile = `/uploads/${req.file.filename}`
+    }
+
+    const editedEmployee = await employeeModel.findByIdAndUpdate(id , req.body  , {new : true}).select('-password')
+    return res.status(200).json({message : "Employee Edit Success",data : editedEmployee})
+  } catch (error) {
+    console.log(error)
+    return res.status(500).json({message : "Internal Server Error"})
+  }
+}
+
+module.exports.deleteEmployee = async(req , res) => {
+  try {
+    const id = req.query.id
+    // console.log(id)
+
+    const employee = await employeeModel.findById(id);
+    // console.log(employee)
+
+    if(employee && employee.isDelete == false){
+      await employeeModel.findByIdAndUpdate(id , {isDelete : true} , {new : true});
+      return res.status(200).json({message : "Employee Delete Success"})
+    }else{
+      return res.status(404).json({message : "Employee Not Found !"})
+    }
+  } catch (error) {
+    console.log(error)
+    return res.status(500).json({message : "Internal Server Error"})
+  }
+}
