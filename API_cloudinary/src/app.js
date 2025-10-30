@@ -1,6 +1,6 @@
 require('dotenv').config()
 const express = require('express')
-const port = process.env.port
+const port = process.env.port || 8001
 const app = express();
 const db = require('./config/db')
 const morgan = require('morgan')
@@ -14,5 +14,5 @@ app.use(express.json())
 app.use('/api',require('./routes/index'))
 
 app.listen(port , (err) => {
-  err ? console.log(err) : console.log(`Server is running on http://localhost:${port}`)
+  err ? console.log(err) : console.log(`Server is running on ${port}`)
 })
