@@ -1,5 +1,5 @@
 const express = require('express');
-const { addAdmin, loginAdmin, deleteAdmin, editAdmin, changePassword } = require('../controller/admin.controller');
+const { addAdmin, loginAdmin, deleteAdmin, editAdmin, changePassword, allAdmin, addManager } = require('../controller/admin.controller');
 const routes = express.Router()
 
 const {storage} = require('../middleware/storage')
@@ -14,6 +14,8 @@ routes.delete('/deleteAdmin/:id',deleteAdmin)  //  when we use path params then 
 
 routes.put('/editAdmin/:id',verifyToken,verifyRole('Admin'),upload.single('profile'),editAdmin)
 routes.post('/changePassword/:id',verifyToken,verifyRole('Admin'),changePassword)
+routes.get('/allAdmin',allAdmin)
 
+routes.post('/addManager',verifyToken,verifyRole('Admin'),upload.single('profile'),addManager)
 
 module.exports = routes;
